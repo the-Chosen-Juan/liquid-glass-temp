@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="keywords"
+        content="advertising, publicidad, creativo, creative, copywriting, portfolio, cannes lions, director creativo, front-end, css, html, copywriter, copy, argentina, Nacho Grosman, Ignacio Grosman, Grosman">
+    <meta name="description"
+        content="Im Ignacio Grosman, creative, copywriter and front-end developer based in Buenos Aires, Argentina. This is my personal portfolio">
+
+    <link rel="icon" href="img/Diseño//icons/favicon-16x16.png">
+
+    <script src="https://kit.fontawesome.com/e82d982690.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/stylecss.css">
+
+    <title>Nacho Grosman | Terminal</title>
+</head>
+
+<body>
+    <!-- Boot Screen -->
+    <div class="boot-screen" id="bootScreen">
+        <div class="boot-line" id="boot-0">BIOS v2.4.1 — Nacho Grosman Systems</div>
+        <div class="boot-line" id="boot-1">Memory test... <span class="ok-tag">1024MB OK</span></div>
+        <div class="boot-line" id="boot-2">Detecting hardware... <span class="ok-tag">OK</span></div>
+        <div class="boot-line" id="boot-3">&nbsp;</div>
+        <div class="boot-line" id="boot-4">Loading kernel modules...</div>
+        <div class="boot-line" id="boot-5">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">display-driver</span></div>
+        <div class="boot-line" id="boot-6">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">font-renderer</span> (JetBrains Mono)</div>
+        <div class="boot-line" id="boot-7">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">network-stack</span></div>
+        <div class="boot-line" id="boot-8">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">creative-engine</span> v12.0</div>
+        <div class="boot-line" id="boot-9">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">portfolio-framework</span></div>
+        <div class="boot-line" id="boot-10">&nbsp;</div>
+        <div class="boot-line" id="boot-11">Mounting filesystem...</div>
+        <div class="boot-line" id="boot-12">&nbsp;&nbsp;/home/nacho/portfolio... <span class="ok-tag">OK</span></div>
+        <div class="boot-line" id="boot-13">&nbsp;&nbsp;/home/nacho/projects... <span class="ok-tag">OK</span></div>
+        <div class="boot-line" id="boot-14">&nbsp;</div>
+        <div class="boot-line accent" id="boot-15">Starting nacho-grosman-portfolio.service...</div>
+        <div class="boot-line highlight" id="boot-16">> Welcome to NachoOS v2.0</div>
+        <div class="boot-line highlight" id="boot-17">> Initializing terminal... <span class="boot-progress">█████████████████████</span></div>
+    </div>
+
+    <!-- Fake visitor indicator -->
+    <div class="visitor-indicator" id="visitorIndicator">
+        <span class="visitor-dot"></span>
+        <span class="visitor-text" id="visitorText"></span>
+    </div>
+
+    <!-- ACCESS GRANTED overlay (Konami Code) -->
+    <div class="access-granted-overlay" id="accessOverlay">
+        <span class="access-text">ACCESS GRANTED</span>
+    </div>
+
+
+    <!-- Terminal Navigation -->
+    <nav class="terminal-nav" id="nav">
+        <div class="nav-container">
+            <div class="nav-prompt">
+                <span class="prompt-symbol">~</span>
+                <span class="nav-path">/nacho-grosman</span>
+            </div>
+            <button class="nav-toggle" onclick="toggleNav()">menu</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active"><i class="fa-solid fa-house nav-icon"></i><span class="nav-label">home</span></a></li>
+                <li><a href="#work"><i class="fa-solid fa-briefcase nav-icon"></i><span class="nav-label">work</span></a></li>
+                <li><a href="#xp"><i class="fa-solid fa-code nav-icon"></i><span class="nav-label">xp</span></a></li>
+                <li><a href="#bio"><i class="fa-solid fa-user nav-icon"></i><span class="nav-label">bio</span></a></li>
+                <li><a href="#contact"><i class="fa-solid fa-envelope nav-icon"></i><span class="nav-label">contact</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <!-- ASCII Art Name -->
+<pre class="ascii-art">
+ ███╗   ██╗ █████╗  ██████╗██╗  ██╗ ██████╗
+ ████╗  ██║██╔══██╗██╔════╝██║  ██║██╔═══██╗
+ ██╔██╗ ██║███████║██║     ███████║██║   ██║
+ ██║╚██╗██║██╔══██║██║     ██╔══██║██║   ██║
+ ██║ ╚████║██║  ██║╚██████╗██║  ██║╚██████╔╝
+ ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝
+  ██████╗ ██████╗  ██████╗ ███████╗███╗   ███╗ █████╗ ███╗   ██╗
+ ██╔════╝ ██╔══██╗██╔═══██╗██╔════╝████╗ ████║██╔══██╗████╗  ██║
+ ██║  ███╗██████╔╝██║   ██║███████╗██╔████╔██║███████║██╔██╗ ██║
+ ██║   ██║██╔══██╗██║   ██║╚════██║██║╚██╔╝██║██╔══██║██║╚██╗██║
+ ╚██████╔╝██║  ██║╚██████╔╝███████║██║ ╚═╝ ██║██║  ██║██║ ╚████║
+  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+</pre>
+            <h1 class="mobile-title" style="display: none;">Nacho Grosman</h1>
+
+            <p class="login-message">
+                <span class="success-icon">*</span> Login successful. Welcome to my portfolio.
+            </p>
+
+            <!-- Intro Section -->
+            <div class="intro-section">
+                <div class="command-line">
+                    <span class="prompt-user">nacho</span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-symbol">~</span>
+                    <span class="command">who.am.i</span>
+                </div>
+                <div class="output-block">
+                    <p>Creative Director | Copywriter | UX Writer | Front-end Developer | AI Enthusiast</p>
+                    <p>Based in Buenos Aires, Argentina</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ignacio-grosman-6b61189b/" target="_blank" class="social-link linkedin">
+                        <i class="fa-brands fa-linkedin-in"></i> linkedin
+                    </a>
+                    <a href="https://www.behance.net/nachogrosman" target="_blank" class="social-link behance">
+                        <i class="fa-brands fa-behance"></i> behance
+                    </a>
+                    <a href="https://github.com/the-Chosen-Juan" target="_blank" class="social-link github">
+                        <i class="fa-brands fa-github"></i> github
+                    </a>
+                    <a href="https://open.spotify.com/user/elbuffaloo?si=2d8787accf5d4c98" target="_blank" class="social-link spotify">
+                        <i class="fa-brands fa-spotify"></i> spotify
+                    </a>
+                    <a href="https://wa.me/5491149475884" target="_blank" class="social-link whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> whatsapp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Work Section -->
+        <section class="section-work" id="work">
+            <div class="section-header">
+<pre class="ascii-art small">
+██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗
+██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝
+██║ █╗ ██║██║   ██║██████╔╝█████╔╝
+██║███╗██║██║   ██║██╔══██╗██╔═██╗
+╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗
+ ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+</pre>
+                <p class="section-command">./work/</p>
+            </div>
+
+
+            <div class="projects-grid">
+                <!-- Philco -->
+                <a href="Philco.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">philco_tenes-un-aire.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Philco/thumb-philco.png" alt="Philco - Tenes un Aire">
+                        <div class="project-overlay">
+                            <span class="project-client">Philco</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Patagonia -->
+                <a href="Patagonia.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">patagonia_incendios.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Patagonia incendios/thumb-pata.png" alt="Patagonia - Incendios">
+                        <div class="project-overlay">
+                            <span class="project-client">Patagonia Brewery</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Gatorade -->
+                <a href="CoolSeats.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">gatorade_cool-seats.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Gatorade/Thumb CoolSeats.png" alt="Gatorade Cool Seats">
+                        <div class="project-overlay">
+                            <span class="project-client">Gatorade</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- DarEsDar -->
+                <a href="DarEsDar.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">movistar_dar-es-dar.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Dar es dar/thumb-daresdar.png" alt="Movistar - Dar es dar">
+                        <div class="project-overlay">
+                            <span class="project-client">Movistar</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Movistar TV -->
+                <a href="MovistarTV.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">movistar_tv.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Movistar TV/thumb-movitv.png" alt="Movistar TV">
+                        <div class="project-overlay">
+                            <span class="project-client">Movistar</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Unicenter -->
+                <a href="Unicenter.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">unicenter_navidad.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Unicenter/thumb-unicenter.png" alt="Unicenter">
+                        <div class="project-overlay">
+                            <span class="project-client">Unicenter</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Nutshot -->
+                <a href="Nutshot.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">nutshot_campaign.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Nutshot/thumb-nutshot.png" alt="Nutshot">
+                        <div class="project-overlay">
+                            <span class="project-client">Nutshot</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Isenbeck -->
+                <a href="Isenbeck.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">isenbeck_campaign.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Isenbeck/thumb-isenbeck.png" alt="Isenbeck">
+                        <div class="project-overlay">
+                            <span class="project-client">Isenbeck</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Paquetizate -->
+                <a href="Paquetizate.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">paquetizate_campaign.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/Paquetizate/thumb-paque.png" alt="Paquetizate">
+                        <div class="project-overlay">
+                            <span class="project-client">Paquetizate</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- NotCo -->
+                <a href="NotTheEnd.html" class="project-card">
+                    <div class="project-header">
+                        <div class="window-buttons">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="project-title">notco_giuseppe.exe</span>
+                    </div>
+                    <div class="project-thumb">
+                        <img src="img/Projects/NotEnd/thumb-NotCo.png" alt="NotCo">
+                        <div class="project-overlay">
+                            <span class="project-client">NotCo</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- XP Section -->
+        <section class="section-xp" id="xp">
+            <div class="section-header">
+<pre class="ascii-art small">
+██╗  ██╗██████╗
+╚██╗██╔╝██╔══██╗
+ ╚███╔╝ ██████╔╝
+ ██╔██╗ ██╔═══╝
+██╔╝ ██╗██║
+╚═╝  ╚═╝╚═╝
+</pre>
+                <p class="section-command">./xp/</p>
+            </div>
+
+
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <div class="skills-header">
+                    <span class="path">~/skills/</span> - tools & technologies
+                </div>
+                <div class="skills-grid ">
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-01.png" alt="Premiere"></div>
+                        <span class="skill-name">Premiere</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-02.png" alt="Photoshop"></div>
+                        <span class="skill-name">Photoshop</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-03.png" alt="Illustrator"></div>
+                        <span class="skill-name">Illustrator</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-04.png" alt="HTML"></div>
+                        <span class="skill-name">HTML</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-05.png" alt="CSS"></div>
+                        <span class="skill-name">CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-06.png" alt="Bootstrap"></div>
+                        <span class="skill-name">Bootstrap</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-07.png" alt="Sass"></div>
+                        <span class="skill-name">Sass</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-08.png" alt="Eleven Labs"></div>
+                        <span class="skill-name">Eleven Labs</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-09.png" alt="MidJourney"></div>
+                        <span class="skill-name">MidJourney</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-10.png" alt="ChatGPT"></div>
+                        <span class="skill-name">ChatGPT</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-11.png" alt="Gemini"></div>
+                        <span class="skill-name">Gemini</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon"><img src="img/Diseño/Skills/skills-12.png" alt="Claude"></div>
+                        <span class="skill-name">Claude</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Clients Section -->
+            <div class="clients-section">
+                <div class="clients-header">
+                    clients/ <span class="count">(24 items)</span>
+                </div>
+                <div class="clients-grid ">
+                    <div class="client-logo"><img src="img/Clients/coca.png" alt="Coca-Cola"></div>
+                    <div class="client-logo"><img src="img/Clients/danone.png" alt="Danone"></div>
+                    <div class="client-logo"><img src="img/Clients/samsung.png" alt="Samsung"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-24.png" alt="Gatorade"></div>
+                    <div class="client-logo"><img src="img/Clients/philco.png" alt="Philco"></div>
+                    <div class="client-logo"><img src="img/Clients/toyota.png" alt="Toyota"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-17.png" alt="Corona Extra"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-22.png" alt="Fiat"></div>
+                    <div class="client-logo"><img src="img/Clients/flow.png" alt="Cablevisión Flow"></div>
+                    <div class="client-logo"><img src="img/Clients/isenbeck.png" alt="Isenbeck"></div>
+                    <div class="client-logo"><img src="img/Clients/PayPal.png" alt="PayPal"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-19.png" alt="Patagonia"></div>
+                    <div class="client-logo"><img src="img/Clients/wars.png" alt="Warsteiner"></div>
+                    <div class="client-logo"><img src="img/Clients/PrimeVideo.png" alt="Prime Video"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-20.png" alt="Michelob Ultra"></div>
+                    <div class="client-logo"><img src="img/Clients/Nike.png" alt="Nike"></div>
+                    <div class="client-logo"><img src="img/Clients/logos-18.png" alt="Walmart"></div>
+                    <div class="client-logo"><img src="img/Clients/movi.png" alt="Movistar"></div>
+                    <div class="client-logo"><img src="img/Clients/JW.png" alt="Johnnie Walker"></div>
+                    <div class="client-logo"><img src="img/Clients/Ikea.png" alt="Ikea"></div>
+                    <div class="client-logo"><img src="img/Clients/NotCo.png" alt="NotCo"></div>
+                    <div class="client-logo"><img src="img/Clients/telecom.png" alt="Telecom"></div>
+                    <div class="client-logo"><img src="img/Clients/TacoBell.png" alt="Taco Bell"></div>
+                    <div class="client-logo"><img src="img/Clients/JPMC.png" alt="JP Morgan Chase"></div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Bio Section -->
+        <section class="section-bio" id="bio">
+            <div class="section-header">
+<pre class="ascii-art small">
+██████╗ ██╗ ██████╗
+██╔══██╗██║██╔═══██╗
+██████╔╝██║██║   ██║
+██╔══██╗██║██║   ██║
+██████╔╝██║╚██████╔╝
+╚═════╝ ╚═╝ ╚═════╝
+</pre>
+                <p class="section-command">./bio/</p>
+            </div>
+
+
+            <div class="bio-content">
+                <div class="bio-header">
+                    <span class="file-icon">*</span>
+                    <span class="file-name">about.md</span>
+                </div>
+                <div class="bio-body">
+                    <div class="bio-text">
+                        <p>Born in the city of Buenos Aires and raised by a single mother who didn't bother to tell him that writing about himself in the 3rd person isn't cool anymore.</p>
+
+                        <p>I started working in advertising in my early 20's for Boca Juniors (Huge fan), and a few local politicians (Not a fan).</p>
+
+                        <p>Making ads that slip into people's conversations is my passion. Having said that, I do have adblock installed in my browser. <span class="highlight">// Ironic, huh?</span></p>
+
+                        <p>I am a huge fan of football, creativity in all of its forms, VR, Gaming, AI, and a little bit of coding - which I used to build this very website.</p>
+
+                        <p>But enough about me. Let me hear about you. <span class="comment">// Use the contact form below</span></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Awards Section -->
+            <div class="awards-section">
+                <div class="awards-header">
+                    achievements.log <span class="timestamp">[verified]</span>
+                </div>
+                <div class="awards-grid ">
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Awards-25.png" alt="Gold Diente"></div>
+                        <span class="award-name">Diente Gold</span>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Awards-26.png" alt="Gold Ojo LATAM"></div>
+                        <span class="award-name">Ojo LATAM Gold</span>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Awards-27.png" alt="Sol de iberoamerica"></div>
+                        <span class="award-name">Sol Gold</span>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Awards-28.png" alt="Gold Effie"></div>
+                        <span class="award-name">Effie Gold</span>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Clio.png" alt="Clio"></div>
+                        <span class="award-name">Clio Gold</span>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><img src="img/Awards/Awards-30.png" alt="Cannes Lions"></div>
+                        <span class="award-name">Cannes Lions Shortlist</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Contact Section -->
+        <section class="section-contact" id="contact">
+            <div class="section-header">
+<pre class="ascii-art small">
+ ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗
+██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝
+██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║        ██║
+██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║        ██║
+╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╗   ██║
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝
+</pre>
+                <p class="section-command">./contact/</p>
+            </div>
+
+
+            <form action="https://formspree.io/f/xwkygavo" method="POST" class="contact-form">
+                <div class="form-header">
+                    <div class="window-buttons">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="form-title">compose_message.sh</span>
+                </div>
+                <div class="form-body">
+                    <p class="form-intro"><span class="cmd">~</span> Initialize message protocol...</p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">email</label>
+                        <input type="email" name="email" id="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">message</label>
+                        <textarea name="message" id="message" class="form-textarea" placeholder="Write your message here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">send --message</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="terminal-footer">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://wa.me/5491149475884" target="_blank" class="footer-link whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ignaciohgrosman@gmail.com" target="_blank" class="footer-link mail">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ignacio-grosman-6b61189b/" target="_blank" class="footer-link linkedin">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/the-Chosen-Juan" target="_blank" class="footer-link github">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.behance.net/nachogrosman" target="_blank" class="footer-link behance">
+                        <i class="fa-brands fa-behance"></i>
+                    </a>
+                    <a href="https://open.spotify.com/user/elbuffaloo?si=2d8787accf5d4c98" target="_blank" class="footer-link spotify">
+                        <i class="fa-brands fa-spotify"></i>
+                    </a>
+                </div>
+
+                <div class="footer-resume">
+                    <a href="https://drive.google.com/uc?export=download&id=1KiDL5LfgyWtHPuimqZ0pccKqPuZvwpf2" class="resume-link">
+                        <i class="fa-solid fa-download"></i> download resume.pdf
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span class="year">2026</span> Nacho Grosman. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Simple mobile nav toggle
+        function toggleNav() {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('nav-open');
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('nav').classList.remove('nav-open');
+                }
+            });
+        });
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            // If at bottom of page, highlight contact
+            const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 80);
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            if (atBottom) current = 'contact';
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ── Boot Sequence ──
+        function runBootSequence(onComplete) {
+            const totalLines = 18;
+            const delays = [
+                200,  // BIOS header
+                400,  // Memory test
+                300,  // Detecting hardware
+                100,  // blank
+                350,  // Loading kernel modules...
+                150,  // display-driver
+                150,  // font-renderer
+                150,  // network-stack
+                150,  // creative-engine
+                150,  // portfolio-framework
+                100,  // blank
+                350,  // Mounting filesystem...
+                200,  // /portfolio
+                200,  // /projects
+                100,  // blank
+                400,  // Starting service
+                300,  // Welcome
+                500   // Initializing + progress bar
+            ];
+
+            let currentLine = 0;
+            function showNextLine() {
+                if (currentLine >= totalLines) {
+                    // Boot done — fade out
+                    setTimeout(() => {
+                        const bootScreen = document.getElementById('bootScreen');
+                        bootScreen.classList.add('fade-out');
+                        setTimeout(() => {
+                            bootScreen.style.display = 'none';
+                            if (onComplete) onComplete();
+                        }, 600);
+                    }, 400);
+                    return;
+                }
+
+                const line = document.getElementById('boot-' + currentLine);
+                if (line) {
+                    line.classList.add('visible');
+                }
+                currentLine++;
+                setTimeout(showNextLine, delays[currentLine - 1] || 150);
+            }
+
+            showNextLine();
+        }
+
+        // ── Sequential Reveal System ──
+        let revealQueue = [];
+        let isRevealing = false;
+
+        function processRevealQueue() {
+            if (isRevealing || revealQueue.length === 0) return;
+
+            isRevealing = true;
+            const item = revealQueue.shift();
+
+            if (item.type === 'typewriter') {
+                typewriterEffect(item.element, () => {
+                    isRevealing = false;
+                    processRevealQueue();
+                });
+            } else {
+                item.element.style.transition = 'opacity 0.1s ease, transform 0.1s ease';
+                item.element.style.opacity = '1';
+                item.element.style.transform = 'translateX(0)';
+                setTimeout(() => {
+                    isRevealing = false;
+                    processRevealQueue();
+                }, 50);
+            }
+        }
+
+        function queueReveal(element, type = 'fade') {
+            if (!element.dataset.queued) {
+                element.dataset.queued = 'true';
+                revealQueue.push({ element, type });
+                processRevealQueue();
+            }
+        }
+
+        // Instantly show an element (no animation, no queue)
+        function instantReveal(element) {
+            if (!element.dataset.queued) {
+                element.dataset.queued = 'true';
+            }
+            element.style.transition = 'none';
+            element.style.opacity = '1';
+            element.style.transform = 'translateX(0)';
+        }
+
+        function typewriterEffect(element, onComplete) {
+            const originalHTML = element.innerHTML;
+            const text = element.textContent;
+            element.innerHTML = '';
+            element.style.opacity = '1';
+            element.style.transform = 'translateX(0)';
+
+            let i = 0;
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            element.appendChild(cursor);
+
+            const speed = Math.max(3, Math.min(10, 200 / text.length));
+
+            const typeInterval = setInterval(() => {
+                if (i < text.length) {
+                    const char = document.createTextNode(text.charAt(i));
+                    element.insertBefore(char, cursor);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                    cursor.remove();
+                    element.innerHTML = originalHTML;
+                    if (onComplete) onComplete();
+                }
+            }, speed);
+        }
+
+        function getRevealableChildren(container) {
+            const items = [];
+            const selectors = [
+                '.ascii-art',
+                '.section-command',
+                '.command-line',
+                '.output-block',
+                '.output-block p',
+                '.login-message',
+                '.social-links',
+                '.social-links a',
+                '.section-header',
+                '.project-card',
+                '.skills-header',
+                '.skills-grid',
+                '.skill-item',
+                '.clients-header',
+                '.clients-grid',
+                '.client-item',
+                '.bio-content',
+                '.bio-header',
+                '.bio-text',
+                '.bio-text p',
+                '.awards-section',
+                '.awards-header',
+                '.awards-grid',
+                '.award-item',
+                '.contact-form',
+                '.form-header',
+                '.form-intro',
+                '.form-group',
+                '.form-submit',
+                '.footer-link',
+                '.resume-link',
+                '.footer-copyright',
+                '.section-divider',
+                'hr'
+            ];
+
+            const allElements = container.querySelectorAll(selectors.join(', '));
+            allElements.forEach(el => {
+                if (!el.dataset.queued && !items.includes(el)) {
+                    items.push(el);
+                }
+            });
+
+            return items;
+        }
+
+        function initRevealSystem() {
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.triggered) {
+                        entry.target.dataset.triggered = 'true';
+                        const elements = getRevealableChildren(entry.target);
+
+                        // If the section's top is above the viewport center, user scrolled UP to it
+                        // → reveal instantly instead of queuing animations
+                        const rect = entry.target.getBoundingClientRect();
+                        const isAbove = rect.top < 0;
+
+                        if (isAbove) {
+                            elements.forEach(el => instantReveal(el));
+                        } else {
+                            elements.forEach(el => {
+                                const isText = el.matches('p, .section-command, .login-message, .skills-header, .clients-header, .awards-header, .form-intro, .footer-copyright, .bio-header, .form-header');
+                                queueReveal(el, isText ? 'typewriter' : 'fade');
+                            });
+                        }
+                    }
+                });
+            }, { threshold: 0.02 });
+
+            document.querySelectorAll('section, .hero, footer').forEach(section => {
+                sectionObserver.observe(section);
+            });
+        }
+
+        // ── Hide all content initially ──
+        const hideSelectors = [
+            '.ascii-art',
+            '.section-command',
+            '.command-line',
+            '.output-block',
+            '.output-block p',
+            '.login-message',
+            '.social-links a',
+            '.section-header',
+            '.project-card',
+            '.skills-header',
+            '.skills-grid',
+            '.skill-item',
+            '.clients-header',
+            '.clients-grid',
+            '.client-item',
+            '.bio-content',
+            '.bio-header',
+            '.bio-text',
+            '.bio-text p',
+            '.awards-section',
+            '.awards-header',
+            '.awards-grid',
+            '.award-item',
+            '.contact-form',
+            '.form-header',
+            '.form-intro',
+            '.form-group',
+            '.form-submit',
+            '.footer-link',
+            '.resume-link',
+            '.footer-copyright',
+            '.section-divider'
+        ];
+
+        document.querySelectorAll(hideSelectors.join(', ')).forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateX(-8px)';
+        });
+
+        // ── Parallax ASCII Art Depth ──
+        document.addEventListener('mousemove', (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const offsetX = ((e.clientX - centerX) / centerX) * -5;
+            const offsetY = ((e.clientY - centerY) / centerY) * -3;
+
+            document.querySelectorAll('.ascii-art').forEach(art => {
+                art.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+
+        // ── Fake Visitor Presence Indicator ──
+        const visitorIndicator = document.getElementById('visitorIndicator');
+        const visitorTextEl = document.getElementById('visitorText');
+        let visitorTimeout = null;
+        let visitorCooldown = false;
+
+        const visitorPaths = [
+            '~/', '~/work/', '~/xp/', '~/bio/', '~/contact/',
+            '~/work/philco_tenes-un-aire.exe',
+            '~/work/patagonia_incendios.exe',
+            '~/work/gatorade_cool-seats.exe',
+            '~/work/movistar_dar-es-dar.exe',
+            '~/work/movistar_tv.exe',
+            '~/work/unicenter_navidad.exe',
+            '~/work/nutshot_campaign.exe',
+            '~/work/isenbeck_campaign.exe',
+            '~/work/paquetizate_campaign.exe',
+            '~/work/notco_giuseppe.exe'
+        ];
+
+        const visitorActions = ['is viewing', 'is reading', 'is browsing', 'connected to'];
+
+        function showFakeVisitor() {
+            if (visitorCooldown) return;
+            visitorCooldown = true;
+
+            const id = Math.floor(Math.random() * 900) + 100;
+            const path = visitorPaths[Math.floor(Math.random() * visitorPaths.length)];
+            const action = visitorActions[Math.floor(Math.random() * visitorActions.length)];
+            visitorTextEl.textContent = `visitor_${id} ${action} ${path}`;
+            visitorIndicator.classList.add('visible');
+
+            if (visitorTimeout) clearTimeout(visitorTimeout);
+            visitorTimeout = setTimeout(() => {
+                visitorIndicator.classList.remove('visible');
+                // Cooldown: don't show another for at least 12s
+                setTimeout(() => { visitorCooldown = false; }, 12000);
+            }, 4000);
+        }
+
+        // Random background timer: first after 18-30s, then every 35-80s
+        function scheduleNextVisitor() {
+            const delay = 35000 + Math.random() * 45000;
+            setTimeout(() => {
+                showFakeVisitor();
+                scheduleNextVisitor();
+            }, delay);
+        }
+        setTimeout(() => {
+            showFakeVisitor();
+            scheduleNextVisitor();
+        }, 18000 + Math.random() * 12000);
+
+        // ── Konami Code Theme Rotation ──
+        const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+        let konamiIndex = 0;
+
+        // Theme rotation: OG (no class) → Matrix → Amber → BlueScreen → Paper → back to OG
+        const themes = [null, 'hacker-mode', 'theme-amber', 'theme-bluescreen', 'theme-glass'];
+        const themeNames = ['DEFAULT', 'ACCESS GRANTED', 'AMBER CRT', 'BLUE SCREEN', 'LIQUID GLASS'];
+        let currentThemeIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiSequence[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiSequence.length) {
+                    konamiIndex = 0;
+                    cycleTheme();
+                }
+            } else {
+                konamiIndex = 0;
+            }
+
+            // ESC resets to OG theme
+            if (e.key === 'Escape' && currentThemeIndex !== 0) {
+                resetToOG();
+            }
+        });
+
+        function cycleTheme() {
+            const overlay = document.getElementById('accessOverlay');
+            const accessText = overlay.querySelector('.access-text');
+            const wrapper = document.querySelector('.wrapper');
+
+            // Move to next theme
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+
+            // Only show overlay text for ACCESS GRANTED (hacker-mode, index 1)
+            if (currentThemeIndex === 1) {
+                accessText.textContent = 'ACCESS GRANTED';
+                overlay.classList.add('flash');
+
+                setTimeout(() => {
+                    overlay.classList.remove('flash');
+                    wrapper.classList.add('glitch-active');
+
+                    themes.forEach(t => { if (t) document.body.classList.remove(t); });
+                    document.body.classList.add(themes[currentThemeIndex]);
+
+                    setTimeout(() => {
+                        wrapper.classList.remove('glitch-active');
+                    }, 400);
+                }, 800);
+            } else {
+                // For all other themes: just glitch, no overlay
+                wrapper.classList.add('glitch-active');
+
+                themes.forEach(t => { if (t) document.body.classList.remove(t); });
+                if (themes[currentThemeIndex]) {
+                    document.body.classList.add(themes[currentThemeIndex]);
+                }
+
+                setTimeout(() => {
+                    wrapper.classList.remove('glitch-active');
+                }, 400);
+            }
+        }
+
+        function resetToOG() {
+            const wrapper = document.querySelector('.wrapper');
+            wrapper.classList.add('glitch-active');
+
+            setTimeout(() => {
+                themes.forEach(t => { if (t) document.body.classList.remove(t); });
+                currentThemeIndex = 0;
+                wrapper.classList.remove('glitch-active');
+            }, 400);
+        }
+
+        // ── Section Change → Sometimes trigger fake visitor ──
+        let currentSectionVisitor = '';
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id') || entry.target.closest('section')?.getAttribute('id');
+                    if (id && id !== currentSectionVisitor) {
+                        currentSectionVisitor = id;
+                        // ~40% chance a visitor appears on section change
+                        if (Math.random() < 0.4) {
+                            setTimeout(() => showFakeVisitor(), 800 + Math.random() * 1500);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('section[id], .hero[id]').forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // ── Decrypt Effect for Project Titles ──
+        const decryptChars = '█▓░▒╗╔║═╚╝┃┫┣━▪▫◆◇■□';
+
+        function decryptText(element) {
+            const originalText = element.textContent;
+            const length = originalText.length;
+            let revealed = 0;
+            const scrambled = new Array(length);
+
+            // Start fully scrambled
+            for (let i = 0; i < length; i++) {
+                scrambled[i] = originalText[i] === ' ' ? ' ' : decryptChars[Math.floor(Math.random() * decryptChars.length)];
+            }
+            element.textContent = scrambled.join('');
+
+            // Scramble interval — keeps cycling random chars on unrevealed positions
+            const scrambleInterval = setInterval(() => {
+                for (let i = revealed; i < length; i++) {
+                    if (originalText[i] !== ' ') {
+                        scrambled[i] = decryptChars[Math.floor(Math.random() * decryptChars.length)];
+                    }
+                }
+                element.textContent = scrambled.join('');
+            }, 40);
+
+            // Reveal interval — locks in one correct character at a time
+            const revealInterval = setInterval(() => {
+                if (revealed >= length) {
+                    clearInterval(scrambleInterval);
+                    clearInterval(revealInterval);
+                    element.textContent = originalText;
+                    return;
+                }
+                scrambled[revealed] = originalText[revealed];
+                revealed++;
+            }, 50);
+        }
+
+        // Observe project cards for decrypt effect
+        const decryptObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.decrypted) {
+                    entry.target.dataset.decrypted = 'true';
+                    const title = entry.target.querySelector('.project-title');
+                    if (title) {
+                        // Small delay so the card fade-in starts first
+                        setTimeout(() => decryptText(title), 150);
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            decryptObserver.observe(card);
+        });
+
+        // ── Liquid Glass: Full-Page Mouse Parallax & Reactivity ──
+        let glassParallaxActive = false;
+        let glassMouseX = 0.5;
+        let glassMouseY = 0.5;
+        let glassSmoothX = 0.5;
+        let glassSmoothY = 0.5;
+
+        function initGlassEffects() {
+            if (glassParallaxActive) return;
+            glassParallaxActive = true;
+
+            document.addEventListener('mousemove', onGlassMouseMove);
+
+            // Floating animation on bubbles
+            const bubbles = document.querySelectorAll('.skill-item, .client-logo, .award-item, .footer-link, .social-link');
+            bubbles.forEach((bubble, i) => {
+                const duration = 3 + Math.random() * 2;
+                const delay = Math.random() * -5;
+                bubble.style.animation = `glassBubbleFloat ${duration}s ${delay}s ease-in-out infinite`;
+            });
+
+            requestAnimationFrame(glassRenderLoop);
+        }
+
+        function onGlassMouseMove(e) {
+            glassMouseX = e.clientX / window.innerWidth;
+            glassMouseY = e.clientY / window.innerHeight;
+        }
+
+        function glassRenderLoop() {
+            if (!document.body.classList.contains('theme-glass')) {
+                glassParallaxActive = false;
+                return;
+            }
+
+            // Smooth lerp for fluid feel
+            glassSmoothX += (glassMouseX - glassSmoothX) * 0.08;
+            glassSmoothY += (glassMouseY - glassSmoothY) * 0.08;
+
+            const mx = (glassSmoothX - 0.5) * 2; // -1 to 1
+            const my = (glassSmoothY - 0.5) * 2;
+
+            // ── Background blobs follow mouse ──
+            const bx = 50 + mx * 12;
+            const by = 50 + my * 12;
+            document.body.style.setProperty('--blob-x', bx + '%');
+            document.body.style.setProperty('--blob-y', by + '%');
+
+            // ── Nav tilt ──
+            const nav = document.querySelector('.terminal-nav');
+            if (nav) {
+                nav.style.transform = `translateX(-50%) perspective(600px) rotateY(${mx * 2}deg) rotateX(${my * -1}deg)`;
+            }
+
+            // ── Project cards parallax ──
+            document.querySelectorAll('.project-card').forEach((card, i) => {
+                const depth = 0.5 + (i % 3) * 0.25;
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.transform = `translate(${mx * -5 * depth}px, ${my * -3 * depth}px)`;
+                }
+            });
+
+            // ── Bubbles parallax (direct transform, works with float animation) ──
+            document.querySelectorAll('.skill-item, .client-logo, .award-item').forEach((b, i) => {
+                const depth = 0.4 + (i % 5) * 0.2;
+                const rect = b.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    b.style.transform = `translate(${mx * -8 * depth}px, ${my * -5 * depth}px)`;
+                }
+            });
+
+            // ── Hero content sway ──
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translate(${mx * -3}px, ${my * -2}px)`;
+            }
+
+            // ── Bio panel subtle shift ──
+            const bio = document.querySelector('.bio-content');
+            if (bio) {
+                const rect = bio.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    bio.style.transform = `translate(${mx * -3}px, ${my * -2}px)`;
+                }
+            }
+
+            // ── Contact form subtle shift ──
+            const contact = document.querySelector('.contact-form');
+            if (contact) {
+                const rect = contact.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    contact.style.transform = `translate(${mx * -3}px, ${my * -2}px)`;
+                }
+            }
+
+            // ── Glass section titles gentle float ──
+            document.querySelectorAll('.glass-section-title').forEach((t) => {
+                const rect = t.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    t.style.transform = `translate(${mx * -4}px, ${my * -2.5}px)`;
+                }
+            });
+
+            // ── Footer links parallax ──
+            document.querySelectorAll('.footer-link, .social-link').forEach((el, i) => {
+                const depth = 0.3 + (i % 4) * 0.15;
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.style.transform = `translate(${mx * -6 * depth}px, ${my * -4 * depth}px)`;
+                }
+            });
+
+            // ── Resume link shift ──
+            const resume = document.querySelector('.resume-link');
+            if (resume) {
+                resume.style.transform = `translate(${mx * -2}px, ${my * -1.5}px)`;
+            }
+
+            requestAnimationFrame(glassRenderLoop);
+        }
+
+        function teardownGlassEffects() {
+            glassParallaxActive = false;
+            document.removeEventListener('mousemove', onGlassMouseMove);
+
+            // Reset ALL transforms
+            const allEls = document.querySelectorAll(
+                '.project-card, .skill-item, .client-logo, .award-item, ' +
+                '.footer-link, .social-link, .glass-section-title, ' +
+                '.bio-content, .contact-form, .hero, .resume-link'
+            );
+            allEls.forEach(el => {
+                el.style.transform = '';
+                el.style.animation = '';
+            });
+            const nav = document.querySelector('.terminal-nav');
+            if (nav) nav.style.transform = '';
+            document.body.style.removeProperty('--blob-x');
+            document.body.style.removeProperty('--blob-y');
+        }
+
+        // Watch for theme changes
+        const glassObserver = new MutationObserver(() => {
+            if (document.body.classList.contains('theme-glass')) {
+                initGlassEffects();
+            } else if (glassParallaxActive) {
+                teardownGlassEffects();
+            }
+        });
+        glassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        // ── Startup: boot sequence or skip ──
+        const hasBooted = sessionStorage.getItem('nachoos-booted');
+        const bootScreen = document.getElementById('bootScreen');
+
+        if (hasBooted) {
+            bootScreen.style.display = 'none';
+            initRevealSystem();
+        } else {
+            runBootSequence(() => {
+                sessionStorage.setItem('nachoos-booted', 'true');
+                initRevealSystem();
+            });
+        }
+    </script>
+</body>
+
+</html>

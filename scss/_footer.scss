@@ -1,0 +1,88 @@
+// Footer - Terminal Style
+
+.terminal-footer {
+    padding: $spacing-2xl 0;
+    border-top: 1px solid $border-color;
+    margin-top: $spacing-3xl;
+
+    .footer-content {
+        text-align: center;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-lg;
+        flex-wrap: wrap;
+
+        .footer-link {
+            color: $text-secondary;
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            transition: color $transition-fast;
+
+            i {
+                font-size: 1.1rem;
+            }
+
+            &:hover {
+                color: $accent-primary;
+            }
+
+            &.linkedin:hover { color: #0e76a8; }
+            &.behance:hover { color: #053eff; }
+            &.spotify:hover { color: #1DB954; }
+            &.github:hover { color: #6e5494; }
+            &.whatsapp:hover { color: #25d366; }
+            &.mail:hover { color: #DB4437; }
+        }
+    }
+
+    .footer-resume {
+        margin-bottom: $spacing-lg;
+
+        .resume-link {
+            display: inline-flex;
+            align-items: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm $spacing-md;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            color: $text-secondary;
+            transition: all $transition-fast;
+
+            &::before {
+                content: '>';
+                color: $accent-primary;
+            }
+
+            &:hover {
+                border-color: $accent-primary;
+                color: $accent-primary;
+            }
+
+            i {
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+    .footer-copyright {
+        color: $text-muted;
+        font-size: 0.8rem;
+
+        .year {
+            color: $text-secondary;
+        }
+    }
+
+    .footer-ascii {
+        margin-top: $spacing-lg;
+        color: $text-muted;
+        font-size: 0.7rem;
+        white-space: pre;
+        line-height: 1.2;
+    }
+}

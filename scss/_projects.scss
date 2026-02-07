@@ -1,0 +1,322 @@
+// Project Pages - Terminal Style
+
+.project-page {
+    padding-top: 60px;
+}
+
+// Project header - terminal window style
+.project-header {
+    @include terminal-box;
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $spacing-2xl;
+
+    .header-bar {
+        background: $bg-card;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .window-buttons {
+            display: flex;
+            gap: 6px;
+
+            span {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+
+                &:nth-child(1) { background: #ff5f56; }
+                &:nth-child(2) { background: #ffbd2e; }
+                &:nth-child(3) { background: #27ca40; }
+            }
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+            color: $text-secondary;
+            font-size: 0.85rem;
+        }
+    }
+
+    .header-content {
+        padding: $spacing-lg;
+        background: $bg-terminal;
+    }
+
+    .project-ascii-title {
+        color: $accent-primary;
+        font-size: clamp(0.3rem, 1vw, 0.6rem);
+        line-height: 1.1;
+        white-space: pre;
+        margin-bottom: $spacing-lg;
+        overflow-x: auto;
+    }
+
+    .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-lg;
+
+        .meta-item {
+            .meta-label {
+                color: $accent-secondary;
+                font-size: 0.8rem;
+            }
+
+            .meta-value {
+                color: $text-primary;
+            }
+        }
+    }
+
+    .project-links {
+        display: flex;
+        gap: $spacing-md;
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: $spacing-sm;
+            padding: $spacing-sm $spacing-md;
+            border: 1px solid $border-color;
+            border-radius: $radius-sm;
+            color: $text-secondary;
+            font-size: 0.85rem;
+            transition: all $transition-fast;
+
+            &:hover {
+                border-color: $accent-primary;
+                color: $accent-primary;
+            }
+
+            &::before {
+                content: '>';
+                color: $accent-primary;
+            }
+        }
+    }
+}
+
+// Video container - terminal style
+.video-section {
+    margin-bottom: $spacing-2xl;
+
+    .video-header {
+        color: $text-secondary;
+        margin-bottom: $spacing-md;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        &::before {
+            content: '>';
+            color: $accent-success;
+        }
+
+        .video-count {
+            color: $text-muted;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+.video-container {
+    @include terminal-box;
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $spacing-md;
+
+    .video-bar {
+        background: $bg-card;
+        padding: $spacing-xs $spacing-sm;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .dots {
+            display: flex;
+            gap: 4px;
+
+            span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: $text-muted;
+            }
+        }
+
+        .video-title {
+            flex: 1;
+            text-align: center;
+            color: $text-secondary;
+            font-size: 0.75rem;
+        }
+    }
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        background: $bg-terminal;
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    }
+}
+
+// Video grid for multiple videos
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: $spacing-md;
+}
+
+// Campaign description - terminal output style
+.campaign-section {
+    @include terminal-box;
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $spacing-2xl;
+
+    .campaign-header {
+        background: $bg-card;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .file-icon {
+            color: $accent-primary;
+        }
+
+        .file-name {
+            color: $text-secondary;
+            font-size: 0.85rem;
+        }
+    }
+
+    .campaign-body {
+        padding: $spacing-lg;
+        background: $bg-terminal;
+
+        .campaign-text {
+            color: $text-primary;
+            line-height: 1.8;
+
+            p {
+                margin-bottom: $spacing-md;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// Image gallery - terminal style
+.gallery-section {
+    margin-bottom: $spacing-2xl;
+
+    .gallery-header {
+        color: $text-secondary;
+        margin-bottom: $spacing-md;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        &::before {
+            content: '>';
+            color: $accent-success;
+        }
+    }
+}
+
+.image-container {
+    @include terminal-box;
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $spacing-md;
+
+    .image-bar {
+        background: $bg-card;
+        padding: $spacing-xs $spacing-sm;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .dots {
+            display: flex;
+            gap: 4px;
+
+            span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: $text-muted;
+            }
+        }
+
+        .image-name {
+            flex: 1;
+            text-align: center;
+            color: $text-secondary;
+            font-size: 0.75rem;
+        }
+    }
+
+    .image-wrapper {
+        background: $bg-terminal;
+        padding: $spacing-sm;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+}
+
+// Image grid
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-md;
+}
+
+// Back navigation
+.back-nav {
+    margin-bottom: $spacing-lg;
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-sm;
+        color: $text-secondary;
+        font-size: 0.9rem;
+        transition: color $transition-fast;
+
+        &:hover {
+            color: $accent-primary;
+        }
+
+        &::before {
+            content: '<';
+            color: $accent-primary;
+        }
+    }
+}

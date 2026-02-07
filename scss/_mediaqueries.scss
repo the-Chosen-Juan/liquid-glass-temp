@@ -1,0 +1,281 @@
+// Media Queries - Terminal Theme Responsive Design
+
+// Tablet breakpoint
+@media screen and (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ascii-art {
+        font-size: clamp(0.3rem, 1vw, 0.6rem);
+    }
+}
+
+// Mobile landscape / small tablet
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding: $spacing-sm;
+    }
+
+    // Navigation
+    .terminal-nav {
+        .nav-links {
+            display: none;
+        }
+
+        .nav-toggle {
+            display: block;
+        }
+
+        &.nav-open .nav-links {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: $bg-secondary;
+            flex-direction: column;
+            padding: $spacing-md;
+            border-bottom: 1px solid $border-color;
+
+            a {
+                padding: $spacing-sm;
+                display: block;
+            }
+        }
+    }
+
+    // Hero
+    .hero {
+        padding-top: 70px;
+        min-height: auto;
+        padding-bottom: $spacing-2xl;
+    }
+
+    .ascii-art {
+        font-size: clamp(0.25rem, 0.9vw, 0.5rem);
+        overflow: hidden;
+    }
+
+    .intro-section .output-block {
+        margin-left: 0;
+    }
+
+    // Projects grid
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    // Skills
+    .skills-section .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .clients-section .clients-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+
+    // Awards
+    .awards-section .awards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+
+    .award-item {
+        padding: $spacing-sm;
+
+        .award-icon {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    // Social links
+    .social-links {
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+
+    // Footer
+    .terminal-footer .footer-links {
+        gap: $spacing-md;
+    }
+
+    // Project pages
+    .project-header .project-meta {
+        flex-direction: column;
+        gap: $spacing-sm;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+// Mobile portrait
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .wrapper {
+        padding: $spacing-xs;
+    }
+
+    // ASCII art scaling for mobile
+    .ascii-art {
+        font-size: clamp(0.18rem, 0.7vw, 0.35rem);
+
+        &.mobile-hide {
+            display: none;
+        }
+    }
+
+    // Show simplified title on mobile
+    .mobile-title {
+        display: block;
+        color: $accent-primary;
+        font-size: 1.5rem;
+        margin-bottom: $spacing-lg;
+    }
+
+    // Welcome box
+    .welcome-box {
+        padding: $spacing-sm $spacing-md;
+    }
+
+    // Project cards
+    .project-card {
+        .project-header {
+            padding: $spacing-xs;
+
+            .project-title {
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    // Skills
+    .skills-section .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .skill-item {
+        font-size: 0.8rem;
+    }
+
+    // Clients
+    .clients-section .clients-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: $spacing-sm;
+    }
+
+    // Bio
+    .bio-content .bio-body {
+        padding: $spacing-md;
+    }
+
+    // Contact form
+    .contact-form {
+        .form-body {
+            padding: $spacing-md;
+        }
+
+        .form-group .form-label {
+            font-size: 0.8rem;
+        }
+    }
+
+    // Footer
+    .terminal-footer {
+        padding: $spacing-lg 0;
+
+        .footer-links {
+            flex-direction: row;
+            justify-content: center;
+            gap: $spacing-md;
+        }
+
+        .footer-ascii {
+            display: none;
+        }
+    }
+
+    // Project pages
+    .project-header {
+        .header-content {
+            padding: $spacing-md;
+        }
+
+        .project-ascii-title {
+            font-size: clamp(0.2rem, 0.8vw, 0.4rem);
+        }
+
+        .project-links {
+            flex-direction: column;
+        }
+    }
+
+    .video-container .video-bar .video-title,
+    .image-container .image-bar .image-name {
+        font-size: 0.65rem;
+    }
+
+    .campaign-section .campaign-body {
+        padding: $spacing-md;
+    }
+}
+
+// Very small screens
+@media screen and (max-width: 360px) {
+    html {
+        font-size: 13px;
+    }
+
+    .ascii-art {
+        display: none;
+    }
+
+    .mobile-title {
+        display: block;
+    }
+
+    .clients-section .clients-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .awards-section .awards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+// Print styles
+@media print {
+    .terminal-nav,
+    .nav-mobile,
+    .social-links,
+    .terminal-footer {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .ascii-art {
+        color: black;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+}

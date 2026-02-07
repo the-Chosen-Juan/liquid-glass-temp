@@ -1,0 +1,1553 @@
+// Base body styles - Terminal aesthetic
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: $font-mono;
+    background-color: $bg-primary;
+    color: $text-primary;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cline x1='8' y1='0' x2='8' y2='16' stroke='%23d08770' stroke-width='1'/%3E%3Cline x1='0' y1='8' x2='16' y2='8' stroke='%23d08770' stroke-width='1'/%3E%3C/svg%3E") 8 8, crosshair;
+}
+
+// CRT Scanline overlay — always visible
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.06) 0px,
+        rgba(0, 0, 0, 0.06) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+}
+
+// CRT Vignette overlay
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+// Custom cursors for interactive elements
+a, button, .project-card, .nav-toggle, .form-submit, .client-logo {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect x='3' y='3' width='10' height='10' fill='none' stroke='%23d08770' stroke-width='1'/%3E%3Cline x1='8' y1='0' x2='8' y2='16' stroke='%23d08770' stroke-width='1' opacity='0.5'/%3E%3Cline x1='0' y1='8' x2='16' y2='8' stroke='%23d08770' stroke-width='1' opacity='0.5'/%3E%3C/svg%3E") 8 8, pointer;
+}
+
+// Boot screen
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $bg-terminal;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    overflow: hidden;
+    transition: opacity 0.6s ease;
+
+    &.fade-out {
+        opacity: 0;
+    }
+
+    .boot-line {
+        color: $text-secondary;
+        font-size: 0.85rem;
+        line-height: 1.8;
+        opacity: 0;
+        transform: translateY(0);
+
+        &.visible {
+            opacity: 1;
+        }
+
+        &.success {
+            color: $accent-success;
+        }
+
+        &.accent {
+            color: $accent-primary;
+        }
+
+        &.highlight {
+            color: $text-primary;
+        }
+
+        .ok-tag {
+            color: $accent-success;
+        }
+
+        .fail-tag {
+            color: $accent-error;
+        }
+
+        .module-name {
+            color: $accent-secondary;
+        }
+
+        .boot-progress {
+            color: $accent-primary;
+        }
+    }
+}
+
+// Main wrapper - terminal window simulation
+.wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: $spacing-md;
+    min-height: 100vh;
+}
+
+.wrapper-project {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $spacing-md;
+    min-height: 100vh;
+}
+
+// Terminal window container
+.terminal-window {
+    @include terminal-box;
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $spacing-xl;
+
+    .terminal-header {
+        background: $bg-card;
+        padding: $spacing-sm $spacing-md;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        border-bottom: 1px solid $border-color;
+
+        .terminal-buttons {
+            display: flex;
+            gap: 6px;
+
+            span {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+
+                &.btn-close { background: #ff5f56; }
+                &.btn-minimize { background: #ffbd2e; }
+                &.btn-maximize { background: #27ca40; }
+            }
+        }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: $text-secondary;
+            font-size: 0.85rem;
+        }
+    }
+
+    .terminal-content {
+        padding: $spacing-lg;
+        background: $bg-terminal;
+    }
+}
+
+// Prompt styling
+.prompt {
+    color: $accent-success;
+
+    &::before {
+        content: '> ';
+        color: $accent-primary;
+    }
+}
+
+// Command output styling
+.output {
+    color: $text-primary;
+    margin-left: $spacing-md;
+}
+
+// Cursor
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.2em;
+    background: $accent-primary;
+    animation: $cursor-blink;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+}
+
+// Selection styling
+::selection {
+    background: rgba($accent-primary, 0.3);
+    color: $text-primary;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: $radius-sm;
+
+    &:hover {
+        background: $text-muted;
+    }
+}
+
+// Links
+a {
+    color: $accent-secondary;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $accent-primary;
+    }
+}
+
+// Paragraphs
+p {
+    margin-bottom: $spacing-md;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Lists with terminal markers
+ul.terminal-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+        padding-left: $spacing-lg;
+        position: relative;
+        margin-bottom: $spacing-sm;
+
+        &::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: $accent-primary;
+        }
+    }
+}
+
+// Code blocks
+code, pre {
+    font-family: $font-mono;
+    background: $bg-terminal;
+    border-radius: $radius-sm;
+}
+
+code {
+    padding: 2px 6px;
+    color: $accent-warning;
+}
+
+pre {
+    padding: $spacing-md;
+    overflow-x: auto;
+    border: 1px solid $border-color;
+
+    code {
+        background: none;
+        padding: 0;
+    }
+}
+
+// Horizontal rule - terminal style
+hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: $spacing-xl 0;
+}
+
+// Images container
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+// ── Hacker Mode (Konami Code Easter Egg) ──
+
+// ACCESS GRANTED flash overlay
+.access-granted-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 200000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+
+    &.flash {
+        opacity: 1;
+    }
+
+    .access-text {
+        color: #00ff41;
+        font-size: clamp(1.5rem, 5vw, 4rem);
+        font-weight: bold;
+        text-shadow: 0 0 20px rgba(0, 255, 65, 0.8), 0 0 60px rgba(0, 255, 65, 0.4);
+        letter-spacing: 0.3em;
+        animation: access-pulse 0.3s ease infinite alternate;
+    }
+}
+
+@keyframes access-pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+// Glitch effect applied during transition
+.glitch-active {
+    animation: glitch-skew 0.4s linear;
+}
+
+@keyframes glitch-skew {
+    0%   { transform: skewX(0deg); filter: hue-rotate(0deg); }
+    10%  { transform: skewX(-2deg); filter: hue-rotate(90deg); }
+    20%  { transform: skewX(3deg) skewY(1deg); filter: hue-rotate(180deg); }
+    30%  { transform: skewX(-1deg); filter: hue-rotate(270deg); }
+    40%  { transform: skewX(2deg) skewY(-1deg); filter: hue-rotate(120deg); }
+    50%  { transform: skewX(0deg); filter: hue-rotate(0deg); }
+    60%  { transform: skewX(-3deg); filter: hue-rotate(200deg); }
+    70%  { transform: skewX(1deg) skewY(1deg); filter: hue-rotate(60deg); }
+    80%  { transform: skewX(-1deg); filter: hue-rotate(300deg); }
+    90%  { transform: skewX(2deg); filter: hue-rotate(150deg); }
+    100% { transform: skewX(0deg); filter: hue-rotate(0deg); }
+}
+
+// Hacker mode color overrides — green-on-black Matrix palette
+body.hacker-mode {
+    background-color: #000 !important;
+
+    &::after {
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 20, 0, 0.5) 100%) !important;
+    }
+
+    &::before {
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 255, 65, 0.03) 0px,
+            rgba(0, 255, 65, 0.03) 1px,
+            transparent 1px,
+            transparent 3px
+        ) !important;
+    }
+
+    .wrapper,
+    .terminal-content,
+    .bio-body,
+    .form-body {
+        background-color: #000 !important;
+    }
+
+    // All text goes green
+    &, p, span, div, h1, h2, h3, li, label {
+        color: #00ff41 !important;
+    }
+
+    // Muted text
+    .text-secondary,
+    .section-command,
+    .footer-copyright,
+    .project-client,
+    .project-title,
+    .form-title,
+    .bio-header .file-name,
+    .nav-path,
+    .clients-header,
+    .awards-header {
+        color: #00aa28 !important;
+    }
+
+    // Accent elements
+    .ascii-art,
+    .accent-primary,
+    .prompt-symbol,
+    .skill-item::before,
+    .typing-cursor,
+    .cursor {
+        color: #00ff41 !important;
+    }
+
+    a {
+        color: #39ff14 !important;
+    }
+
+    // Borders
+    .terminal-nav,
+    .project-card,
+    .bio-content,
+    .contact-form,
+    .terminal-footer,
+    .section-divider,
+    .skills-header,
+    .clients-grid,
+    .award-item,
+    hr {
+        border-color: #004d00 !important;
+    }
+
+    // Backgrounds
+    .terminal-nav,
+    .project-card,
+    .project-header,
+    .bio-content,
+    .bio-header,
+    .contact-form,
+    .form-header,
+    .clients-grid,
+    .award-item,
+    .bg-secondary {
+        background-color: #001a00 !important;
+    }
+
+    .project-card:hover {
+        border-color: #00ff41 !important;
+    }
+
+    // Nav
+    .nav-links a {
+        color: #00aa28 !important;
+
+        &::before, &::after {
+            color: #004d00 !important;
+        }
+
+        &:hover, &.active {
+            color: #00ff41 !important;
+        }
+    }
+
+    // Selection
+    ::selection {
+        background: rgba(0, 255, 65, 0.3) !important;
+        color: #00ff41 !important;
+    }
+
+    // Scrollbar
+    ::-webkit-scrollbar-track {
+        background: #001a00 !important;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #004d00 !important;
+    }
+
+    // Images get green tint
+    .skill-icon img,
+    .client-logo img,
+    .award-icon img {
+        filter: grayscale(100%) brightness(0.8) sepia(100%) hue-rotate(70deg) saturate(500%) !important;
+    }
+
+    .project-thumb img {
+        filter: grayscale(100%) brightness(0.6) sepia(100%) hue-rotate(70deg) saturate(300%) !important;
+    }
+
+    // Form inputs & textarea
+    .form-input,
+    .form-textarea {
+        background-color: #001a00 !important;
+        border-color: #004d00 !important;
+        color: #00ff41 !important;
+
+        &::placeholder {
+            color: #005500 !important;
+        }
+
+        &:focus {
+            border-color: #00ff41 !important;
+        }
+    }
+
+    // Submit button
+    .form-submit {
+        background-color: #001a00 !important;
+        border-color: #00ff41 !important;
+        color: #00ff41 !important;
+
+        &:hover {
+            background-color: #00ff41 !important;
+            color: #000 !important;
+        }
+    }
+
+    // Resume link
+    .resume-link {
+        border-color: #004d00 !important;
+        color: #00aa28 !important;
+
+        &::before {
+            color: #00ff41 !important;
+        }
+
+        &:hover {
+            border-color: #00ff41 !important;
+            color: #00ff41 !important;
+        }
+    }
+
+    // Footer link icons
+    .footer-link {
+        color: #00aa28 !important;
+
+        i {
+            color: #00aa28 !important;
+        }
+
+        &:hover, &:hover i {
+            color: #00ff41 !important;
+        }
+    }
+
+    // Form label prefix
+    .form-label::before {
+        color: #00ff41 !important;
+    }
+
+    // Form submit prefix
+    .form-submit::before {
+        color: #00ff41 !important;
+    }
+
+    // Window buttons monochrome green
+    .window-buttons span {
+        background: #00ff41 !important;
+    }
+}
+
+// ── Parallax ASCII Art ──
+.ascii-art {
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+}
+
+// ── Fake Visitor Indicator ──
+.visitor-indicator {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    background: rgba(13, 13, 13, 0.92);
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    padding: $spacing-xs $spacing-md;
+    font-size: 0.8rem;
+    z-index: 8000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .visitor-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: $accent-success;
+        animation: visitor-pulse 1.5s ease infinite;
+    }
+
+    .visitor-text {
+        color: $text-muted;
+    }
+}
+
+@keyframes visitor-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+// ── Theme: Amber CRT (IBM 3278) ──
+body.theme-amber {
+    background-color: #0a0600 !important;
+
+    &::before {
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(255, 176, 0, 0.04) 0px,
+            rgba(255, 176, 0, 0.04) 1px,
+            transparent 1px,
+            transparent 3px
+        ) !important;
+    }
+
+    &::after {
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(10, 6, 0, 0.5) 100%) !important;
+    }
+
+    .wrapper, .terminal-content, .bio-body, .form-body {
+        background-color: #0a0600 !important;
+    }
+
+    &, p, span, div, h1, h2, h3, li, label {
+        color: #ffb000 !important;
+    }
+
+    .text-secondary, .section-command, .footer-copyright, .project-client,
+    .project-title, .form-title, .bio-header .file-name, .nav-path,
+    .clients-header, .awards-header {
+        color: #b07800 !important;
+    }
+
+    .ascii-art, .prompt-symbol, .skill-item::before, .typing-cursor, .cursor {
+        color: #ffb000 !important;
+    }
+
+    a { color: #ffc340 !important; }
+
+    .terminal-nav, .project-card, .bio-content, .contact-form, .terminal-footer,
+    .section-divider, .skills-header, .clients-grid, .award-item, hr {
+        border-color: #3d2800 !important;
+    }
+
+    .terminal-nav, .project-card, .project-header, .bio-content, .bio-header,
+    .contact-form, .form-header, .clients-grid, .award-item {
+        background-color: #1a0e00 !important;
+    }
+
+    .project-card:hover { border-color: #ffb000 !important; }
+
+    .nav-links a { color: #b07800 !important; }
+    .nav-links a::before, .nav-links a::after { color: #3d2800 !important; }
+    .nav-links a:hover, .nav-links a.active { color: #ffb000 !important; }
+
+    ::selection { background: rgba(255, 176, 0, 0.3) !important; color: #ffb000 !important; }
+    ::-webkit-scrollbar-track { background: #1a0e00 !important; }
+    ::-webkit-scrollbar-thumb { background: #3d2800 !important; }
+
+    .skill-icon img, .client-logo img, .award-icon img {
+        filter: grayscale(100%) brightness(0.8) sepia(100%) saturate(500%) hue-rotate(-10deg) !important;
+    }
+    .project-thumb img {
+        filter: grayscale(100%) brightness(0.5) sepia(100%) saturate(300%) hue-rotate(-10deg) !important;
+    }
+
+    .form-input, .form-textarea {
+        background-color: #1a0e00 !important; border-color: #3d2800 !important; color: #ffb000 !important;
+        &::placeholder { color: #5a3d00 !important; }
+        &:focus { border-color: #ffb000 !important; }
+    }
+    .form-submit {
+        background-color: #1a0e00 !important; border-color: #ffb000 !important; color: #ffb000 !important;
+        &:hover { background-color: #ffb000 !important; color: #0a0600 !important; }
+        &::before { color: #ffb000 !important; }
+    }
+    .form-label::before { color: #ffb000 !important; }
+    .resume-link {
+        border-color: #3d2800 !important; color: #b07800 !important;
+        &::before { color: #ffb000 !important; }
+        &:hover { border-color: #ffb000 !important; color: #ffb000 !important; }
+    }
+    .footer-link, .footer-link i { color: #b07800 !important; }
+    .footer-link:hover, .footer-link:hover i { color: #ffb000 !important; }
+
+    .window-buttons span { background: #ffb000 !important; }
+}
+
+// ── Theme: Blue Screen (DOS/BIOS) ──
+body.theme-bluescreen {
+    background-color: #0000aa !important;
+
+    &::before {
+        background: repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.02) 0px,
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px,
+            transparent 3px
+        ) !important;
+    }
+
+    &::after {
+        background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 100, 0.4) 100%) !important;
+    }
+
+    .wrapper, .terminal-content, .bio-body, .form-body {
+        background-color: #0000aa !important;
+    }
+
+    &, p, span, div, h1, h2, h3, li, label {
+        color: #ffffff !important;
+    }
+
+    .text-secondary, .section-command, .footer-copyright, .project-client,
+    .project-title, .form-title, .bio-header .file-name, .nav-path,
+    .clients-header, .awards-header {
+        color: #aaaaff !important;
+    }
+
+    .ascii-art {
+        color: #ffffff !important;
+    }
+
+    .prompt-symbol, .skill-item::before, .typing-cursor, .cursor {
+        color: #ffff54 !important;
+    }
+
+    a { color: #55ffff !important; }
+
+    .terminal-nav, .project-card, .bio-content, .contact-form, .terminal-footer,
+    .section-divider, .skills-header, .clients-grid, .award-item, hr {
+        border-color: #5555ff !important;
+    }
+
+    .terminal-nav, .project-card, .project-header, .bio-content, .bio-header,
+    .contact-form, .form-header, .clients-grid, .award-item {
+        background-color: #000080 !important;
+    }
+
+    .project-card:hover { border-color: #ffffff !important; }
+
+    .nav-links a { color: #aaaaff !important; }
+    .nav-links a::before, .nav-links a::after { color: #5555ff !important; }
+    .nav-links a:hover, .nav-links a.active { color: #ffff54 !important; }
+
+    ::selection { background: rgba(255, 255, 84, 0.4) !important; color: #0000aa !important; }
+    ::-webkit-scrollbar-track { background: #000080 !important; }
+    ::-webkit-scrollbar-thumb { background: #5555ff !important; }
+
+    .skill-icon img, .client-logo img, .award-icon img {
+        filter: grayscale(100%) brightness(1.2) !important;
+    }
+    .project-thumb img {
+        filter: grayscale(100%) brightness(0.7) contrast(1.2) !important;
+    }
+
+    .form-input, .form-textarea {
+        background-color: #000080 !important; border-color: #5555ff !important; color: #ffffff !important;
+        &::placeholder { color: #7777cc !important; }
+        &:focus { border-color: #ffffff !important; }
+    }
+    .form-submit {
+        background-color: #000080 !important; border-color: #ffffff !important; color: #ffffff !important;
+        &:hover { background-color: #ffffff !important; color: #0000aa !important; }
+        &::before { color: #ffff54 !important; }
+    }
+    .form-label::before { color: #ffff54 !important; }
+    .resume-link {
+        border-color: #5555ff !important; color: #aaaaff !important;
+        &::before { color: #ffff54 !important; }
+        &:hover { border-color: #ffffff !important; color: #ffffff !important; }
+    }
+    .footer-link, .footer-link i { color: #aaaaff !important; }
+    .footer-link:hover, .footer-link:hover i { color: #ffffff !important; }
+
+    .window-buttons span { background: #ffffff !important; }
+}
+
+// ── Theme: Liquid Glass ──
+body.theme-glass {
+    // ── Iridescent background with animated color blobs ──
+    background: #c8d0de !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    overflow-x: hidden !important;
+
+    // No scanlines
+    &::before {
+        background: none !important;
+        pointer-events: none !important;
+    }
+
+    // Animated iridescent color blobs — follow mouse via custom properties
+    --blob-x: 50%;
+    --blob-y: 50%;
+
+    &::after {
+        content: '' !important;
+        position: fixed !important;
+        top: -10% !important;
+        left: -10% !important;
+        width: 120% !important;
+        height: 120% !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        background:
+            radial-gradient(ellipse 600px 600px at calc(15% + (var(--blob-x) - 50%) * 0.3) calc(20% + (var(--blob-y) - 50%) * 0.3), rgba(180, 120, 255, 0.35) 0%, transparent 70%),
+            radial-gradient(ellipse 500px 500px at calc(80% + (var(--blob-x) - 50%) * 0.5) calc(15% + (var(--blob-y) - 50%) * 0.5), rgba(100, 180, 255, 0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 550px 550px at calc(70% + (var(--blob-x) - 50%) * 0.4) calc(75% + (var(--blob-y) - 50%) * 0.4), rgba(255, 140, 180, 0.3) 0%, transparent 70%),
+            radial-gradient(ellipse 400px 400px at calc(25% + (var(--blob-x) - 50%) * 0.6) calc(80% + (var(--blob-y) - 50%) * 0.6), rgba(100, 220, 200, 0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 450px 450px at var(--blob-x) var(--blob-y), rgba(255, 200, 150, 0.25) 0%, transparent 70%) !important;
+        animation: glassBlobs 20s ease-in-out infinite alternate !important;
+        transition: background 0.3s ease-out !important;
+    }
+
+    .wrapper {
+        position: relative !important;
+        z-index: 1 !important;
+        background: transparent !important;
+    }
+
+    .terminal-content, .bio-body, .form-body {
+        background: transparent !important;
+    }
+
+    // ── Typography ──
+    &, p, span, div, h1, h2, h3, li, label {
+        color: #1a1e2e !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+
+    pre, code {
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    .text-secondary, .footer-copyright, .project-client,
+    .form-title {
+        color: #5a6278 !important;
+    }
+
+    // ── Hide ALL console terminology ──
+    .ascii-art { display: none !important; }
+    .section-command { display: none !important; }
+    .section-header { display: none !important; }
+    .command-line { display: none !important; }
+    .login-message { display: none !important; }
+    .prompt-symbol, .prompt-user, .prompt-at, .prompt-host { display: none !important; }
+    .bio-header .file-icon, .bio-header .file-name { display: none !important; }
+    .skills-header { display: none !important; }
+    .clients-header { display: none !important; }
+    .awards-header { display: none !important; }
+
+    // ── Hero: Liquid glass title ──
+    .mobile-title {
+        display: block !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: clamp(3rem, 8vw, 6rem) !important;
+        font-weight: 200 !important;
+        letter-spacing: -0.04em !important;
+        color: rgba(255, 255, 255, 0.75) !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.05 !important;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(255, 255, 255, 0.5) 30%,
+            rgba(200, 220, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.7) 70%,
+            rgba(255, 255, 255, 0.9) 100%
+        ) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08)) !important;
+    }
+
+    .hero {
+        text-align: center !important;
+        padding-top: 6rem !important;
+    }
+
+    .output-block {
+        text-align: center !important;
+        border-left: none !important;
+        margin-left: 0 !important;
+        padding: 0 !important;
+        p {
+            color: #3a4058 !important;
+            font-weight: 300 !important;
+            font-size: 1.05rem !important;
+        }
+    }
+
+    // ── Social links: glass bubbles ──
+    .social-links {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 0.8rem !important;
+        margin-top: 2rem !important;
+    }
+
+    .social-link {
+        width: 48px !important;
+        height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        color: #4a5070 !important;
+        font-size: 1.1rem !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        overflow: hidden !important;
+
+        &:hover {
+            transform: translateY(-3px) scale(1.08) !important;
+            background: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 2px 6px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            color: #1a1e2e !important;
+        }
+
+        // Hide text labels in social links
+        font-size: 0 !important;
+        i { font-size: 1.1rem !important; }
+    }
+
+    // ── Navigation: Glass pill ──
+    .terminal-nav {
+        top: 1rem !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(24px) saturate(1.4) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(1.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 50px !important;
+        padding: 0.3rem 0.4rem !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        z-index: 1000 !important;
+    }
+
+    .nav-container {
+        justify-content: center !important;
+    }
+
+    .nav-prompt { display: none !important; }
+    .nav-toggle { display: none !important; }
+
+    .nav-links {
+        gap: 0.15rem !important;
+        display: flex !important;
+    }
+
+    .nav-links a {
+        color: rgba(60, 70, 100, 0.6) !important;
+        padding: 0.55rem 0.9rem !important;
+        border-radius: 50px !important;
+        font-size: 0.95rem !important;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        text-shadow: none !important;
+        position: relative !important;
+        background: transparent !important;
+        box-shadow: none !important;
+
+        &::before, &::after { content: none !important; }
+        .nav-icon { display: inline-block !important; }
+        .nav-label { display: none !important; }
+    }
+
+    .nav-links a:hover {
+        color: #2a3050 !important;
+        background: rgba(255, 255, 255, 0.25) !important;
+        text-shadow: none !important;
+    }
+
+    .nav-links a.active {
+        color: #1a1e2e !important;
+        background: rgba(255, 255, 255, 0.55) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06),
+                    0 1px 2px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                    inset 0 -1px 1px rgba(0, 0, 0, 0.02) !important;
+        text-shadow: none !important;
+        transform: scale(1.05) !important;
+    }
+
+    // ── Section dividers — invisible ──
+    .section-divider, hr {
+        border: none !important;
+        height: 0 !important;
+        margin: 2rem 0 !important;
+    }
+
+    // ── Project cards — full liquid glass ──
+    .project-card {
+        background: rgba(255, 255, 255, 0.3) !important;
+        backdrop-filter: blur(20px) saturate(1.4) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.55) !important;
+        border-bottom-color: rgba(0, 0, 0, 0.03) !important;
+        border-radius: 24px !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+        // Specular gloss overlay
+        &::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 50% !important;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.15) 0%,
+                transparent 100%) !important;
+            border-radius: 24px 24px 0 0 !important;
+            pointer-events: none !important;
+            z-index: 2 !important;
+        }
+    }
+
+    .project-card:hover {
+        transform: translateY(-4px) scale(1.01) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                    0 2px 8px rgba(0, 0, 0, 0.06),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .project-header {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 24px 24px 0 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-top: none !important;
+    }
+
+    .project-title {
+        color: #3a4058 !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 400 !important;
+    }
+
+    .project-thumb img {
+        filter: brightness(1) saturate(1) !important;
+        border-radius: 0 0 24px 24px !important;
+    }
+
+    .project-overlay {
+        border-radius: 0 0 24px 24px !important;
+    }
+
+    .project-client {
+        display: none !important;
+    }
+
+    // ── Glass section titles ──
+    .glass-section-title {
+        display: none;
+        font-family: 'Inter', sans-serif !important;
+        font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+        font-weight: 200 !important;
+        letter-spacing: -0.03em !important;
+        text-align: center !important;
+        margin-bottom: 0.5rem !important;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(255, 255, 255, 0.5) 30%,
+            rgba(200, 220, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.65) 70%,
+            rgba(255, 255, 255, 0.85) 100%
+        ) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.06)) !important;
+    }
+
+    // Show glass titles only in glass theme
+    .glass-section-title {
+        display: block !important;
+    }
+
+    // ── XP section: floating glass bubbles ──
+    .section-xp {
+        padding: 2rem 0 !important;
+    }
+
+    .skills-section {
+        margin-bottom: 3rem !important;
+    }
+
+    .skills-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1.4rem !important;
+        padding: 2rem 0 !important;
+    }
+
+    .skill-item {
+        width: 88px !important;
+        height: 88px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        padding: 0 !important;
+        position: relative !important;
+
+        // Hide text
+        .skill-name { display: none !important; }
+        &::before { display: none !important; }
+
+        .skill-icon {
+            width: 48px !important;
+            height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            img {
+                width: 44px !important;
+                height: 44px !important;
+                object-fit: contain !important;
+                filter: grayscale(30%) brightness(0.7) contrast(1.1) !important;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-4px) scale(1.1) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 2px 8px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+        }
+    }
+
+    // ── Clients: floating glass bubbles ──
+    .clients-section {
+        margin-bottom: 2rem !important;
+    }
+
+    .clients-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1.2rem !important;
+        padding: 2rem 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .client-logo {
+        width: 88px !important;
+        height: 88px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        padding: 12px !important;
+        overflow: hidden !important;
+
+        img {
+            width: 52px !important;
+            height: 52px !important;
+            object-fit: contain !important;
+            filter: grayscale(30%) brightness(0.7) contrast(1.1) !important;
+        }
+
+        &:hover {
+            transform: translateY(-4px) scale(1.1) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 2px 8px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            img { filter: grayscale(10%) brightness(0.8) !important; }
+        }
+    }
+
+    // ── Awards: floating glass bubbles ──
+    .awards-section {
+        margin-top: 2rem !important;
+    }
+
+    .awards-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 1.2rem !important;
+        padding: 2rem 0 !important;
+    }
+
+    .award-item {
+        width: 88px !important;
+        height: 88px !important;
+        min-width: 88px !important;
+        min-height: 88px !important;
+        max-width: 88px !important;
+        max-height: 88px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        padding: 0 !important;
+        flex-direction: column !important;
+        flex-shrink: 0 !important;
+
+        // Hide text
+        .award-name { display: none !important; }
+
+        .award-icon {
+            width: 52px !important;
+            height: 52px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            img {
+                width: 48px !important;
+                height: 48px !important;
+                object-fit: contain !important;
+                filter: none !important;
+            }
+        }
+
+        &:hover {
+            transform: translateY(-4px) scale(1.1) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        0 2px 8px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+        }
+    }
+
+    // ── Bio: clean glass panel ──
+    .bio-content {
+        background: rgba(255, 255, 255, 0.3) !important;
+        backdrop-filter: blur(20px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.55) !important;
+        border-bottom-color: rgba(0, 0, 0, 0.03) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+        overflow: hidden !important;
+    }
+
+    .bio-header {
+        display: none !important;
+    }
+
+    .bio-body {
+        padding: 2rem !important;
+    }
+
+    .bio-text {
+        .highlight, .comment { color: #6a7290 !important; font-style: italic !important; }
+    }
+
+    // ── Contact form: glass panel ──
+    .contact-form {
+        background: rgba(255, 255, 255, 0.3) !important;
+        backdrop-filter: blur(20px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.55) !important;
+        border-bottom-color: rgba(0, 0, 0, 0.03) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .form-header {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-radius: 24px 24px 0 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+
+    .form-title {
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    .form-intro {
+        .cmd { display: none !important; }
+    }
+
+    // ── Form inputs ──
+    .form-input, .form-textarea {
+        background: rgba(255, 255, 255, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-bottom-color: rgba(0, 0, 0, 0.03) !important;
+        color: #1a1e2e !important;
+        border-radius: 16px !important;
+        font-family: 'Inter', sans-serif !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+        transition: all 0.3s ease !important;
+
+        &::placeholder { color: #8a90a4 !important; }
+        &:focus {
+            border-color: rgba(120, 160, 255, 0.4) !important;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03),
+                        0 0 0 3px rgba(120, 160, 255, 0.12) !important;
+            background: rgba(255, 255, 255, 0.5) !important;
+        }
+    }
+
+    .form-submit {
+        background: rgba(255, 255, 255, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-bottom-color: rgba(0, 0, 0, 0.03) !important;
+        color: #1a1e2e !important;
+        border-radius: 50px !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+        &:hover {
+            background: rgba(255, 255, 255, 0.55) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+        }
+        &::before { color: #5a6278 !important; }
+    }
+
+    .form-label {
+        font-family: 'Inter', sans-serif !important;
+        &::before { color: #5a6278 !important; }
+    }
+
+    // ── Footer: floating glass bubbles ──
+    .terminal-footer {
+        background: transparent !important;
+        border: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: none !important;
+        border-top: none !important;
+        padding: 3rem 0 !important;
+    }
+
+    .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+    }
+
+    .footer-links {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 0.8rem !important;
+    }
+
+    .footer-link {
+        width: 48px !important;
+        height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    0 1px 3px rgba(0, 0, 0, 0.04),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                    inset 0 -1px 2px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        color: #4a5070 !important;
+
+        i { color: #4a5070 !important; font-size: 1.1rem !important; }
+
+        &:hover {
+            transform: translateY(-3px) scale(1.08) !important;
+            background: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            i { color: #1a1e2e !important; }
+        }
+    }
+
+    .resume-link {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        padding: 0.7rem 1.5rem !important;
+        border-radius: 50px !important;
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(16px) saturate(1.3) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(1.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+        color: #3a4058 !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+        &::before { display: none !important; }
+
+        &:hover {
+            transform: translateY(-2px) !important;
+            background: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            color: #1a1e2e !important;
+        }
+    }
+
+    .footer-copyright {
+        color: #6a7290 !important;
+        font-size: 0.8rem !important;
+        font-weight: 300 !important;
+    }
+
+    // ── Window buttons — glass dots ──
+    .window-buttons span {
+        background: rgba(0, 0, 0, 0.06) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                    0 1px 2px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    // ── Selection ──
+    ::selection { background: rgba(120, 160, 255, 0.2) !important; color: #1a1e2e !important; }
+
+    // ── Scrollbar ──
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04) !important; }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1) !important;
+        border-radius: 10px !important;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.18) !important; }
+
+    // ── Images — unified muted style ──
+    .skill-icon img {
+        filter: grayscale(30%) brightness(0.7) contrast(1.1) !important;
+    }
+    .award-icon img {
+        filter: none !important;
+    }
+    .client-logo img {
+        filter: grayscale(30%) brightness(0.7) contrast(1.1) !important;
+    }
+
+    // ── All glass elements: color glow-through effect ──
+    .project-card,
+    .bio-content,
+    .contact-form,
+    .skill-item,
+    .client-logo,
+    .award-item,
+    .social-link,
+    .footer-link,
+    .terminal-nav,
+    .nav-links a.active,
+    .resume-link {
+        position: relative !important;
+        // The JS will handle the chromatic glow via a ::before pseudo or overlay div
+    }
+
+    // ── Cursor ──
+    cursor: default !important;
+    a, button, .project-card, .nav-toggle, .form-submit, .client-logo, .skill-item, .award-item, .social-link, .footer-link {
+        cursor: pointer !important;
+    }
+
+    // ── Keyframes ──
+    @at-root {
+        @keyframes glassBlobs {
+            0% {
+                background:
+                    radial-gradient(ellipse 600px 600px at 15% 20%, rgba(180, 120, 255, 0.35) 0%, transparent 70%),
+                    radial-gradient(ellipse 500px 500px at 80% 15%, rgba(100, 180, 255, 0.3) 0%, transparent 70%),
+                    radial-gradient(ellipse 550px 550px at 70% 75%, rgba(255, 140, 180, 0.3) 0%, transparent 70%),
+                    radial-gradient(ellipse 400px 400px at 25% 80%, rgba(100, 220, 200, 0.25) 0%, transparent 70%),
+                    radial-gradient(ellipse 450px 450px at 50% 45%, rgba(255, 200, 150, 0.2) 0%, transparent 70%);
+            }
+            100% {
+                background:
+                    radial-gradient(ellipse 550px 550px at 30% 35%, rgba(160, 140, 255, 0.3) 0%, transparent 70%),
+                    radial-gradient(ellipse 600px 600px at 70% 25%, rgba(120, 200, 255, 0.35) 0%, transparent 70%),
+                    radial-gradient(ellipse 500px 500px at 20% 65%, rgba(255, 160, 200, 0.25) 0%, transparent 70%),
+                    radial-gradient(ellipse 450px 450px at 75% 80%, rgba(120, 230, 210, 0.3) 0%, transparent 70%),
+                    radial-gradient(ellipse 500px 500px at 45% 15%, rgba(255, 180, 130, 0.25) 0%, transparent 70%);
+            }
+        }
+
+        @keyframes glassBubbleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+    }
+}

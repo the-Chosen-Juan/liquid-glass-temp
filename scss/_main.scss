@@ -1,0 +1,265 @@
+// Main Hero Section - Terminal Style
+
+.hero {
+    padding-top: 60px;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: $spacing-xl;
+
+    .welcome-box {
+        @include terminal-border;
+        background: rgba($bg-terminal, 0.8);
+        padding: $spacing-md $spacing-lg;
+        margin-bottom: $spacing-2xl;
+        display: inline-block;
+
+        .welcome-text {
+            color: $text-primary;
+            margin: 0;
+
+            .highlight {
+                color: $accent-primary;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+// ASCII Art Title
+.ascii-art {
+    color: $accent-primary;
+    font-size: clamp(0.35rem, 1.2vw, 0.75rem);
+    line-height: 1.1;
+    white-space: pre;
+    margin-bottom: $spacing-xl;
+    overflow: hidden;
+    // Remove terminal window styling from ASCII art
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    &.small {
+        font-size: clamp(0.25rem, 0.8vw, 0.5rem);
+    }
+
+    &.large {
+        font-size: clamp(0.4rem, 1.5vw, 0.9rem);
+    }
+}
+
+// Login message
+.login-message {
+    color: $text-secondary;
+    margin-top: $spacing-xl;
+    font-size: 0.95rem;
+
+    .success-icon {
+        color: $accent-warning;
+        margin-right: $spacing-sm;
+    }
+
+    .enter-key {
+        color: $accent-primary;
+        font-weight: bold;
+    }
+}
+
+// Command line intro
+.intro-section {
+    margin-top: $spacing-2xl;
+
+    .command-line {
+        margin-bottom: $spacing-md;
+
+        .prompt-user {
+            color: $accent-success;
+        }
+
+        .prompt-at {
+            color: $text-secondary;
+        }
+
+        .prompt-host {
+            color: $accent-secondary;
+        }
+
+        .prompt-symbol {
+            color: $accent-primary;
+            margin: 0 $spacing-sm;
+        }
+
+        .command {
+            color: $text-primary;
+        }
+    }
+
+    .output-block {
+        margin-left: $spacing-md;
+        padding: $spacing-md;
+        border-left: 2px solid $border-color;
+        margin-bottom: $spacing-lg;
+
+        p {
+            color: $text-primary;
+            margin-bottom: $spacing-sm;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .info-label {
+            color: $accent-secondary;
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        .info-value {
+            color: $text-primary;
+        }
+    }
+}
+
+// Social links terminal style
+.social-links {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    margin-top: $spacing-lg;
+
+    .social-link {
+        color: $text-secondary;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        transition: color $transition-fast;
+
+        &::before {
+            content: '>';
+            color: $accent-primary;
+        }
+
+        i {
+            width: 20px;
+        }
+
+        &:hover {
+            color: $accent-primary;
+        }
+
+        &.linkedin:hover { color: #0e76a8; }
+        &.behance:hover { color: #053eff; }
+        &.spotify:hover { color: #1DB954; }
+        &.github:hover { color: #6e5494; }
+        &.whatsapp:hover { color: #25d366; }
+        &.mail:hover { color: #DB4437; }
+    }
+}
+
+// Section divider
+.section-divider {
+    border: none;
+    border-top: 1px dashed $border-color;
+    margin: $spacing-xl 0;
+}
+
+// Typewriter scroll animation
+.typewriter {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.1s ease, transform 0.3s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Typewriter text reveal animation
+.typewriter-text {
+    .char {
+        opacity: 0;
+        display: inline-block;
+        transition: opacity 0.02s ease;
+
+        &.typed {
+            opacity: 1;
+        }
+    }
+}
+
+// Terminal typing cursor for animation
+.typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: $accent-primary;
+    margin-left: 2px;
+    animation: blink 0.7s step-end infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+// Staggered reveal for list items and grid items
+.stagger-reveal {
+    > * {
+        opacity: 0;
+        transform: translateY(15px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    &.visible > * {
+        opacity: 1;
+        transform: translateY(0);
+
+        @for $i from 1 through 24 {
+            &:nth-child(#{$i}) {
+                transition-delay: #{$i * 0.03}s;
+            }
+        }
+    }
+}
+
+// Terminal line-by-line reveal animation for project cards
+.terminal-reveal {
+    .project-card {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    &.visible .project-card {
+        opacity: 1;
+        transform: translateX(0);
+
+        @for $i from 1 through 12 {
+            &:nth-child(#{$i}) {
+                transition-delay: #{$i * 0.08}s;
+            }
+        }
+    }
+}
+
+// Text reveal animation - typewriter style for all text
+.text-reveal {
+    opacity: 0;
+
+    &.visible {
+        animation: textReveal 0.5s ease forwards;
+    }
+}
+
+@keyframes textReveal {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

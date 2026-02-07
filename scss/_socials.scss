@@ -1,0 +1,18 @@
+// Socials - Terminal Style (kept minimal, main styles in _main.scss and _footer.scss)
+
+// Social color map for hover effects
+$socials: (
+    linkedin: #0e76a8,
+    behance: #053eff,
+    spotify: #1DB954,
+    whatsapp: #25d366,
+    github: #6e5494,
+    mail: #DB4437,
+);
+
+// Generate social hover classes
+@each $network, $color in $socials {
+    .social-#{$network}:hover {
+        color: $color !important;
+    }
+}
