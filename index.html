@@ -21,45 +21,11 @@
 
     <link rel="stylesheet" href="css/stylecss.css">
 
-    <title>Nacho Grosman | Terminal</title>
+    <title>Nacho Grosman | Portfolio</title>
 </head>
 
-<body>
-    <!-- Boot Screen -->
-    <div class="boot-screen" id="bootScreen">
-        <div class="boot-line" id="boot-0">BIOS v2.4.1 — Nacho Grosman Systems</div>
-        <div class="boot-line" id="boot-1">Memory test... <span class="ok-tag">1024MB OK</span></div>
-        <div class="boot-line" id="boot-2">Detecting hardware... <span class="ok-tag">OK</span></div>
-        <div class="boot-line" id="boot-3">&nbsp;</div>
-        <div class="boot-line" id="boot-4">Loading kernel modules...</div>
-        <div class="boot-line" id="boot-5">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">display-driver</span></div>
-        <div class="boot-line" id="boot-6">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">font-renderer</span> (JetBrains Mono)</div>
-        <div class="boot-line" id="boot-7">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">network-stack</span></div>
-        <div class="boot-line" id="boot-8">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">creative-engine</span> v12.0</div>
-        <div class="boot-line" id="boot-9">&nbsp;&nbsp;[<span class="ok-tag">OK</span>] <span class="module-name">portfolio-framework</span></div>
-        <div class="boot-line" id="boot-10">&nbsp;</div>
-        <div class="boot-line" id="boot-11">Mounting filesystem...</div>
-        <div class="boot-line" id="boot-12">&nbsp;&nbsp;/home/nacho/portfolio... <span class="ok-tag">OK</span></div>
-        <div class="boot-line" id="boot-13">&nbsp;&nbsp;/home/nacho/projects... <span class="ok-tag">OK</span></div>
-        <div class="boot-line" id="boot-14">&nbsp;</div>
-        <div class="boot-line accent" id="boot-15">Starting nacho-grosman-portfolio.service...</div>
-        <div class="boot-line highlight" id="boot-16">> Welcome to NachoOS v2.0</div>
-        <div class="boot-line highlight" id="boot-17">> Initializing terminal... <span class="boot-progress">█████████████████████</span></div>
-    </div>
-
-    <!-- Fake visitor indicator -->
-    <div class="visitor-indicator" id="visitorIndicator">
-        <span class="visitor-dot"></span>
-        <span class="visitor-text" id="visitorText"></span>
-    </div>
-
-    <!-- ACCESS GRANTED overlay (Konami Code) -->
-    <div class="access-granted-overlay" id="accessOverlay">
-        <span class="access-text">ACCESS GRANTED</span>
-    </div>
-
-
-    <!-- Terminal Navigation -->
+<body class="theme-glass">
+    <!-- Navigation -->
     <nav class="terminal-nav" id="nav">
         <div class="nav-container">
             <div class="nav-prompt">
@@ -596,7 +562,6 @@
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-links a');
 
-            // If at bottom of page, highlight contact
             const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 80);
 
             let current = '';
@@ -617,57 +582,7 @@
             });
         });
 
-        // ── Boot Sequence ──
-        function runBootSequence(onComplete) {
-            const totalLines = 18;
-            const delays = [
-                200,  // BIOS header
-                400,  // Memory test
-                300,  // Detecting hardware
-                100,  // blank
-                350,  // Loading kernel modules...
-                150,  // display-driver
-                150,  // font-renderer
-                150,  // network-stack
-                150,  // creative-engine
-                150,  // portfolio-framework
-                100,  // blank
-                350,  // Mounting filesystem...
-                200,  // /portfolio
-                200,  // /projects
-                100,  // blank
-                400,  // Starting service
-                300,  // Welcome
-                500   // Initializing + progress bar
-            ];
-
-            let currentLine = 0;
-            function showNextLine() {
-                if (currentLine >= totalLines) {
-                    // Boot done — fade out
-                    setTimeout(() => {
-                        const bootScreen = document.getElementById('bootScreen');
-                        bootScreen.classList.add('fade-out');
-                        setTimeout(() => {
-                            bootScreen.style.display = 'none';
-                            if (onComplete) onComplete();
-                        }, 600);
-                    }, 400);
-                    return;
-                }
-
-                const line = document.getElementById('boot-' + currentLine);
-                if (line) {
-                    line.classList.add('visible');
-                }
-                currentLine++;
-                setTimeout(showNextLine, delays[currentLine - 1] || 150);
-            }
-
-            showNextLine();
-        }
-
-        // ── Sequential Reveal System ──
+        // ── Reveal System ──
         let revealQueue = [];
         let isRevealing = false;
 
@@ -677,93 +592,46 @@
             isRevealing = true;
             const item = revealQueue.shift();
 
-            if (item.type === 'typewriter') {
-                typewriterEffect(item.element, () => {
-                    isRevealing = false;
-                    processRevealQueue();
-                });
-            } else {
-                item.element.style.transition = 'opacity 0.1s ease, transform 0.1s ease';
-                item.element.style.opacity = '1';
-                item.element.style.transform = 'translateX(0)';
-                setTimeout(() => {
-                    isRevealing = false;
-                    processRevealQueue();
-                }, 50);
-            }
+            item.element.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            item.element.style.opacity = '1';
+            item.element.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                isRevealing = false;
+                processRevealQueue();
+            }, 50);
         }
 
-        function queueReveal(element, type = 'fade') {
+        function queueReveal(element) {
             if (!element.dataset.queued) {
                 element.dataset.queued = 'true';
-                revealQueue.push({ element, type });
+                revealQueue.push({ element });
                 processRevealQueue();
             }
         }
 
-        // Instantly show an element (no animation, no queue)
         function instantReveal(element) {
             if (!element.dataset.queued) {
                 element.dataset.queued = 'true';
             }
             element.style.transition = 'none';
             element.style.opacity = '1';
-            element.style.transform = 'translateX(0)';
-        }
-
-        function typewriterEffect(element, onComplete) {
-            const originalHTML = element.innerHTML;
-            const text = element.textContent;
-            element.innerHTML = '';
-            element.style.opacity = '1';
-            element.style.transform = 'translateX(0)';
-
-            let i = 0;
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-            element.appendChild(cursor);
-
-            const speed = Math.max(3, Math.min(10, 200 / text.length));
-
-            const typeInterval = setInterval(() => {
-                if (i < text.length) {
-                    const char = document.createTextNode(text.charAt(i));
-                    element.insertBefore(char, cursor);
-                    i++;
-                } else {
-                    clearInterval(typeInterval);
-                    cursor.remove();
-                    element.innerHTML = originalHTML;
-                    if (onComplete) onComplete();
-                }
-            }, speed);
+            element.style.transform = 'translateY(0)';
         }
 
         function getRevealableChildren(container) {
             const items = [];
             const selectors = [
-                '.ascii-art',
-                '.section-command',
-                '.command-line',
-                '.output-block',
-                '.output-block p',
-                '.login-message',
                 '.social-links',
                 '.social-links a',
-                '.section-header',
                 '.project-card',
-                '.skills-header',
                 '.skills-grid',
                 '.skill-item',
-                '.clients-header',
                 '.clients-grid',
-                '.client-item',
+                '.client-logo',
                 '.bio-content',
-                '.bio-header',
                 '.bio-text',
                 '.bio-text p',
                 '.awards-section',
-                '.awards-header',
                 '.awards-grid',
                 '.award-item',
                 '.contact-form',
@@ -773,9 +641,7 @@
                 '.form-submit',
                 '.footer-link',
                 '.resume-link',
-                '.footer-copyright',
-                '.section-divider',
-                'hr'
+                '.footer-copyright'
             ];
 
             const allElements = container.querySelectorAll(selectors.join(', '));
@@ -795,18 +661,13 @@
                         entry.target.dataset.triggered = 'true';
                         const elements = getRevealableChildren(entry.target);
 
-                        // If the section's top is above the viewport center, user scrolled UP to it
-                        // → reveal instantly instead of queuing animations
                         const rect = entry.target.getBoundingClientRect();
                         const isAbove = rect.top < 0;
 
                         if (isAbove) {
                             elements.forEach(el => instantReveal(el));
                         } else {
-                            elements.forEach(el => {
-                                const isText = el.matches('p, .section-command, .login-message, .skills-header, .clients-header, .awards-header, .form-intro, .footer-copyright, .bio-header, .form-header');
-                                queueReveal(el, isText ? 'typewriter' : 'fade');
-                            });
+                            elements.forEach(el => queueReveal(el));
                         }
                     }
                 });
@@ -817,29 +678,18 @@
             });
         }
 
-        // ── Hide all content initially ──
+        // ── Hide content initially for reveal animation ──
         const hideSelectors = [
-            '.ascii-art',
-            '.section-command',
-            '.command-line',
-            '.output-block',
-            '.output-block p',
-            '.login-message',
             '.social-links a',
-            '.section-header',
             '.project-card',
-            '.skills-header',
             '.skills-grid',
             '.skill-item',
-            '.clients-header',
             '.clients-grid',
-            '.client-item',
+            '.client-logo',
             '.bio-content',
-            '.bio-header',
             '.bio-text',
             '.bio-text p',
             '.awards-section',
-            '.awards-header',
             '.awards-grid',
             '.award-item',
             '.contact-form',
@@ -849,244 +699,21 @@
             '.form-submit',
             '.footer-link',
             '.resume-link',
-            '.footer-copyright',
-            '.section-divider'
+            '.footer-copyright'
         ];
 
         document.querySelectorAll(hideSelectors.join(', ')).forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateX(-8px)';
-        });
-
-        // ── Parallax ASCII Art Depth ──
-        document.addEventListener('mousemove', (e) => {
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const offsetX = ((e.clientX - centerX) / centerX) * -5;
-            const offsetY = ((e.clientY - centerY) / centerY) * -3;
-
-            document.querySelectorAll('.ascii-art').forEach(art => {
-                art.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-            });
-        });
-
-        // ── Fake Visitor Presence Indicator ──
-        const visitorIndicator = document.getElementById('visitorIndicator');
-        const visitorTextEl = document.getElementById('visitorText');
-        let visitorTimeout = null;
-        let visitorCooldown = false;
-
-        const visitorPaths = [
-            '~/', '~/work/', '~/xp/', '~/bio/', '~/contact/',
-            '~/work/philco_tenes-un-aire.exe',
-            '~/work/patagonia_incendios.exe',
-            '~/work/gatorade_cool-seats.exe',
-            '~/work/movistar_dar-es-dar.exe',
-            '~/work/movistar_tv.exe',
-            '~/work/unicenter_navidad.exe',
-            '~/work/nutshot_campaign.exe',
-            '~/work/isenbeck_campaign.exe',
-            '~/work/paquetizate_campaign.exe',
-            '~/work/notco_giuseppe.exe'
-        ];
-
-        const visitorActions = ['is viewing', 'is reading', 'is browsing', 'connected to'];
-
-        function showFakeVisitor() {
-            if (visitorCooldown) return;
-            visitorCooldown = true;
-
-            const id = Math.floor(Math.random() * 900) + 100;
-            const path = visitorPaths[Math.floor(Math.random() * visitorPaths.length)];
-            const action = visitorActions[Math.floor(Math.random() * visitorActions.length)];
-            visitorTextEl.textContent = `visitor_${id} ${action} ${path}`;
-            visitorIndicator.classList.add('visible');
-
-            if (visitorTimeout) clearTimeout(visitorTimeout);
-            visitorTimeout = setTimeout(() => {
-                visitorIndicator.classList.remove('visible');
-                // Cooldown: don't show another for at least 12s
-                setTimeout(() => { visitorCooldown = false; }, 12000);
-            }, 4000);
-        }
-
-        // Random background timer: first after 18-30s, then every 35-80s
-        function scheduleNextVisitor() {
-            const delay = 35000 + Math.random() * 45000;
-            setTimeout(() => {
-                showFakeVisitor();
-                scheduleNextVisitor();
-            }, delay);
-        }
-        setTimeout(() => {
-            showFakeVisitor();
-            scheduleNextVisitor();
-        }, 18000 + Math.random() * 12000);
-
-        // ── Konami Code Theme Rotation ──
-        const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-        let konamiIndex = 0;
-
-        // Theme rotation: OG (no class) → Matrix → Amber → BlueScreen → Paper → back to OG
-        const themes = [null, 'hacker-mode', 'theme-amber', 'theme-bluescreen', 'theme-glass'];
-        const themeNames = ['DEFAULT', 'ACCESS GRANTED', 'AMBER CRT', 'BLUE SCREEN', 'LIQUID GLASS'];
-        let currentThemeIndex = 0;
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === konamiSequence[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiSequence.length) {
-                    konamiIndex = 0;
-                    cycleTheme();
-                }
-            } else {
-                konamiIndex = 0;
-            }
-
-            // ESC resets to OG theme
-            if (e.key === 'Escape' && currentThemeIndex !== 0) {
-                resetToOG();
-            }
-        });
-
-        function cycleTheme() {
-            const overlay = document.getElementById('accessOverlay');
-            const accessText = overlay.querySelector('.access-text');
-            const wrapper = document.querySelector('.wrapper');
-
-            // Move to next theme
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-
-            // Only show overlay text for ACCESS GRANTED (hacker-mode, index 1)
-            if (currentThemeIndex === 1) {
-                accessText.textContent = 'ACCESS GRANTED';
-                overlay.classList.add('flash');
-
-                setTimeout(() => {
-                    overlay.classList.remove('flash');
-                    wrapper.classList.add('glitch-active');
-
-                    themes.forEach(t => { if (t) document.body.classList.remove(t); });
-                    document.body.classList.add(themes[currentThemeIndex]);
-
-                    setTimeout(() => {
-                        wrapper.classList.remove('glitch-active');
-                    }, 400);
-                }, 800);
-            } else {
-                // For all other themes: just glitch, no overlay
-                wrapper.classList.add('glitch-active');
-
-                themes.forEach(t => { if (t) document.body.classList.remove(t); });
-                if (themes[currentThemeIndex]) {
-                    document.body.classList.add(themes[currentThemeIndex]);
-                }
-
-                setTimeout(() => {
-                    wrapper.classList.remove('glitch-active');
-                }, 400);
-            }
-        }
-
-        function resetToOG() {
-            const wrapper = document.querySelector('.wrapper');
-            wrapper.classList.add('glitch-active');
-
-            setTimeout(() => {
-                themes.forEach(t => { if (t) document.body.classList.remove(t); });
-                currentThemeIndex = 0;
-                wrapper.classList.remove('glitch-active');
-            }, 400);
-        }
-
-        // ── Section Change → Sometimes trigger fake visitor ──
-        let currentSectionVisitor = '';
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id') || entry.target.closest('section')?.getAttribute('id');
-                    if (id && id !== currentSectionVisitor) {
-                        currentSectionVisitor = id;
-                        // ~40% chance a visitor appears on section change
-                        if (Math.random() < 0.4) {
-                            setTimeout(() => showFakeVisitor(), 800 + Math.random() * 1500);
-                        }
-                    }
-                }
-            });
-        }, { threshold: 0.3 });
-
-        document.querySelectorAll('section[id], .hero[id]').forEach(section => {
-            sectionObserver.observe(section);
-        });
-
-        // ── Decrypt Effect for Project Titles ──
-        const decryptChars = '█▓░▒╗╔║═╚╝┃┫┣━▪▫◆◇■□';
-
-        function decryptText(element) {
-            const originalText = element.textContent;
-            const length = originalText.length;
-            let revealed = 0;
-            const scrambled = new Array(length);
-
-            // Start fully scrambled
-            for (let i = 0; i < length; i++) {
-                scrambled[i] = originalText[i] === ' ' ? ' ' : decryptChars[Math.floor(Math.random() * decryptChars.length)];
-            }
-            element.textContent = scrambled.join('');
-
-            // Scramble interval — keeps cycling random chars on unrevealed positions
-            const scrambleInterval = setInterval(() => {
-                for (let i = revealed; i < length; i++) {
-                    if (originalText[i] !== ' ') {
-                        scrambled[i] = decryptChars[Math.floor(Math.random() * decryptChars.length)];
-                    }
-                }
-                element.textContent = scrambled.join('');
-            }, 40);
-
-            // Reveal interval — locks in one correct character at a time
-            const revealInterval = setInterval(() => {
-                if (revealed >= length) {
-                    clearInterval(scrambleInterval);
-                    clearInterval(revealInterval);
-                    element.textContent = originalText;
-                    return;
-                }
-                scrambled[revealed] = originalText[revealed];
-                revealed++;
-            }, 50);
-        }
-
-        // Observe project cards for decrypt effect
-        const decryptObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.dataset.decrypted) {
-                    entry.target.dataset.decrypted = 'true';
-                    const title = entry.target.querySelector('.project-title');
-                    if (title) {
-                        // Small delay so the card fade-in starts first
-                        setTimeout(() => decryptText(title), 150);
-                    }
-                }
-            });
-        }, { threshold: 0.2 });
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            decryptObserver.observe(card);
+            el.style.transform = 'translateY(12px)';
         });
 
         // ── Liquid Glass: Full-Page Mouse Parallax & Reactivity ──
-        let glassParallaxActive = false;
         let glassMouseX = 0.5;
         let glassMouseY = 0.5;
         let glassSmoothX = 0.5;
         let glassSmoothY = 0.5;
 
         function initGlassEffects() {
-            if (glassParallaxActive) return;
-            glassParallaxActive = true;
-
             document.addEventListener('mousemove', onGlassMouseMove);
 
             // Floating animation on bubbles
@@ -1106,31 +733,26 @@
         }
 
         function glassRenderLoop() {
-            if (!document.body.classList.contains('theme-glass')) {
-                glassParallaxActive = false;
-                return;
-            }
-
             // Smooth lerp for fluid feel
             glassSmoothX += (glassMouseX - glassSmoothX) * 0.08;
             glassSmoothY += (glassMouseY - glassSmoothY) * 0.08;
 
-            const mx = (glassSmoothX - 0.5) * 2; // -1 to 1
+            const mx = (glassSmoothX - 0.5) * 2;
             const my = (glassSmoothY - 0.5) * 2;
 
-            // ── Background blobs follow mouse ──
+            // Background blobs follow mouse
             const bx = 50 + mx * 12;
             const by = 50 + my * 12;
             document.body.style.setProperty('--blob-x', bx + '%');
             document.body.style.setProperty('--blob-y', by + '%');
 
-            // ── Nav tilt ──
+            // Nav tilt
             const nav = document.querySelector('.terminal-nav');
             if (nav) {
                 nav.style.transform = `translateX(-50%) perspective(600px) rotateY(${mx * 2}deg) rotateX(${my * -1}deg)`;
             }
 
-            // ── Project cards parallax ──
+            // Project cards parallax
             document.querySelectorAll('.project-card').forEach((card, i) => {
                 const depth = 0.5 + (i % 3) * 0.25;
                 const rect = card.getBoundingClientRect();
@@ -1139,7 +761,7 @@
                 }
             });
 
-            // ── Bubbles parallax (direct transform, works with float animation) ──
+            // Bubbles parallax
             document.querySelectorAll('.skill-item, .client-logo, .award-item').forEach((b, i) => {
                 const depth = 0.4 + (i % 5) * 0.2;
                 const rect = b.getBoundingClientRect();
@@ -1148,13 +770,13 @@
                 }
             });
 
-            // ── Hero content sway ──
+            // Hero content sway
             const hero = document.querySelector('.hero');
             if (hero) {
                 hero.style.transform = `translate(${mx * -3}px, ${my * -2}px)`;
             }
 
-            // ── Bio panel subtle shift ──
+            // Bio panel subtle shift
             const bio = document.querySelector('.bio-content');
             if (bio) {
                 const rect = bio.getBoundingClientRect();
@@ -1163,7 +785,7 @@
                 }
             }
 
-            // ── Contact form subtle shift ──
+            // Contact form subtle shift
             const contact = document.querySelector('.contact-form');
             if (contact) {
                 const rect = contact.getBoundingClientRect();
@@ -1172,7 +794,7 @@
                 }
             }
 
-            // ── Glass section titles gentle float ──
+            // Glass section titles gentle float
             document.querySelectorAll('.glass-section-title').forEach((t) => {
                 const rect = t.getBoundingClientRect();
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -1180,7 +802,7 @@
                 }
             });
 
-            // ── Footer links parallax ──
+            // Footer links parallax
             document.querySelectorAll('.footer-link, .social-link').forEach((el, i) => {
                 const depth = 0.3 + (i % 4) * 0.15;
                 const rect = el.getBoundingClientRect();
@@ -1189,7 +811,7 @@
                 }
             });
 
-            // ── Resume link shift ──
+            // Resume link shift
             const resume = document.querySelector('.resume-link');
             if (resume) {
                 resume.style.transform = `translate(${mx * -2}px, ${my * -1.5}px)`;
@@ -1198,49 +820,9 @@
             requestAnimationFrame(glassRenderLoop);
         }
 
-        function teardownGlassEffects() {
-            glassParallaxActive = false;
-            document.removeEventListener('mousemove', onGlassMouseMove);
-
-            // Reset ALL transforms
-            const allEls = document.querySelectorAll(
-                '.project-card, .skill-item, .client-logo, .award-item, ' +
-                '.footer-link, .social-link, .glass-section-title, ' +
-                '.bio-content, .contact-form, .hero, .resume-link'
-            );
-            allEls.forEach(el => {
-                el.style.transform = '';
-                el.style.animation = '';
-            });
-            const nav = document.querySelector('.terminal-nav');
-            if (nav) nav.style.transform = '';
-            document.body.style.removeProperty('--blob-x');
-            document.body.style.removeProperty('--blob-y');
-        }
-
-        // Watch for theme changes
-        const glassObserver = new MutationObserver(() => {
-            if (document.body.classList.contains('theme-glass')) {
-                initGlassEffects();
-            } else if (glassParallaxActive) {
-                teardownGlassEffects();
-            }
-        });
-        glassObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
-        // ── Startup: boot sequence or skip ──
-        const hasBooted = sessionStorage.getItem('nachoos-booted');
-        const bootScreen = document.getElementById('bootScreen');
-
-        if (hasBooted) {
-            bootScreen.style.display = 'none';
-            initRevealSystem();
-        } else {
-            runBootSequence(() => {
-                sessionStorage.setItem('nachoos-booted', 'true');
-                initRevealSystem();
-            });
-        }
+        // ── Startup ──
+        initRevealSystem();
+        initGlassEffects();
     </script>
 </body>
 
